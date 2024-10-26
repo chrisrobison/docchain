@@ -17,7 +17,7 @@ MONGO_URL = "mongodb://localhost:27017"
 SECRET_KEY = "SBPW2BGMHBFKVBZUBLPVDVWI42P4CC2LHYGQSGDHLF7AUOARPNNMKU33"
 ALGORITHM = "HS256"
 
-app = FastAPI(title="Enhanced Digital Notary Service API")
+app = FastAPI(title="DocChain Digital Notary Service API")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 # Database initialization
