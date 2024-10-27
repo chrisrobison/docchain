@@ -1,8 +1,8 @@
-# StellarNotary API Documentation
+# DocChain Notary API Documentation
 
 ## Base URL
 ```
-https://api.stellarnotary.com/v1
+https://api.docchainnotary.com/v1
 ```
 
 ## Authentication
@@ -29,7 +29,7 @@ Content-Type: multipart/form-data
 
 **Example Request:**
 ```bash
-curl -X POST https://api.stellarnotary.com/v1/documents \
+curl -X POST https://api.docchainnotary.com/v1/documents \
   -H "Authorization: Bearer <token>" \
   -F "file=@contract.pdf" \
   -F "title=Sales Contract" \
@@ -45,7 +45,7 @@ curl -X POST https://api.stellarnotary.com/v1/documents \
   "transaction_id": "tx_123456789",
   "created_at": "2024-10-26T14:30:00Z",
   "blockchain_proof": {
-    "network": "stellar",
+    "network": "docchain",
     "block_number": "12345678",
     "timestamp": "2024-10-26T14:30:00Z"
   }
@@ -67,7 +67,7 @@ Content-Type: multipart/form-data
 
 **Example Request:**
 ```bash
-curl -X POST https://api.stellarnotary.com/v1/documents/0x1234.../versions \
+curl -X POST https://api.docchainnotary.com/v1/documents/0x1234.../versions \
   -H "Authorization: Bearer <token>" \
   -F "file=@contract_v2.pdf" \
   -F "title=Sales Contract - Revised" \
@@ -250,10 +250,10 @@ Official SDKs available for:
 
 Import packages from:
 ```
-npm install @stellarnotary/sdk
-pip install stellarnotary-sdk
-cargo add stellarnotary-sdk
-go get github.com/stellarnotary/sdk
+npm install @docchainnotary/sdk
+pip install docchainnotary-sdk
+cargo add docchainnotary-sdk
+go get github.com/docchainnotary/sdk
 ```
 
 ## Best Practices

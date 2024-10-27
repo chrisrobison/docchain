@@ -1,142 +1,239 @@
-# System Architecture Document: Decentralized Digital Notary Service
+# DocChain Technical Architecture
+## System Architecture & Stellar Integration Specification
 
-## 1. Introduction
+### 1. System Overview
 
-This document outlines the system architecture for the Decentralized Digital Notary Service built on the Stellar blockchain using Soroban smart contracts. The service aims to provide a secure, transparent, and tamper-proof notarization solution for digital documents.
+DocChain is built on a microservices architecture with Stellar blockchain integration for document notarization and verification. The system consists of five primary components:
 
-## 2. System Overview
+#### Core Components
+  1. User Interface Layer
+  2. API Gateway
+  3. Document Processing Service
+  4. Blockchain Service
+  5. Storage Layer
 
-The Decentralized Digital Notary Service consists of the following main components:
+### 2. Detailed Architecture
 
-1. User Interface (Frontend)
-2. Application Server (Backend)
-3. Soroban Smart Contract
-4. Stellar Blockchain Network
-5. IPFS Storage (Optional)
+#### 2.1 User Interface Layer
+  - React-based web application
+  - Progressive Web App (PWA) capabilities
+  - WebSocket integration for real-time status updates
+  - Client-side document hashing
 
-## 3. Component Description
+**Security Features:**
 
-### 3.1 User Interface (Frontend)
+- End-to-end encryption
+- Multi-factor authentication
+- JWT-based session management
 
-- **Technology**: React.js
-- **Purpose**: Provides a user-friendly interface for document upload, notarization, and verification.
-- **Key Features**:
-  - Document upload and hashing
-  - Notarization request initiation
-  - Verification request handling
-  - Display of notarization proofs and verification results
+#### 2.2 API Gateway (Node.js)
+  - REST API endpoints
+  - Rate limiting
+  - Request validation
+  - Load balancing
+  - API versioning
 
-### 3.2 Application Server (Backend)
+#### 2.3 Document Processing Service (Python)
+  - Document validation
+  - Format conversion
+  - Metadata extraction
+  - Hash generation (SHA-256)
+  - Smart contract interaction
 
-- **Technology**: Node.js with Express.js
-- **Purpose**: Handles API requests from the frontend, interacts with the Soroban smart contract, and manages user authentication.
-- **Key Features**:
-  - RESTful API endpoints
-  - User authentication and management
-  - Integration with Stellar SDK for blockchain interactions
-  - Document hash generation and validation
+#### 2.4 Blockchain Service (Stellar Integration)
+##### Core Functionality
+  - Smart contract deployment and management
+  - Transaction submission
+  - Hash verification
+  - Network status monitoring
 
-### 3.3 Soroban Smart Contract
+##### Stellar Integration Details
 
-- **Technology**: Rust
-- **Purpose**: Implements the core notarization and verification logic on the Stellar blockchain.
-- **Key Features**:
-  - Notarization function to store document hashes
-  - Verification function to check the existence of notarized documents
-  - Timestamp recording for each notarization
+1. **Transaction Management**
+   ```typescript
+   interface StellarTransaction {
+     sourceAccount: string;
+     documentHash: string;
+     timestamp: number;
+     metadata: {
+       documentType: string;
+       version: string;
+       validationRules: string[];
+     }
+   }
+   ```
 
-### 3.4 Stellar Blockchain Network
+2. **Smart Contract Implementation**
+   ```typescript
+   class NotaryContract {
+     // Stellar account for the contract
+     public contractAccount: string;
+     
+     // Document registration
+     async registerDocument(
+       hash: string, 
+       metadata: DocumentMetadata
+     ): Promise<Transaction> {
+       // Create Stellar transaction
+       // Add document hash as memo
+       // Sign and submit
+     }
+     
+     // Document verification
+     async verifyDocument(
+       hash: string
+     ): Promise<VerificationResult> {
+       // Query Stellar network
+       // Verify hash existence
+       // Return verification status
+     }
+   }
+   ```
 
-- **Purpose**: Provides a decentralized, immutable ledger for storing notarization records.
-- **Key Features**:
-  - Consensus mechanism for transaction validation
-  - Decentralized storage of notarization data
-  - Public verifiability of transactions
+3. **Network Integration**
+   - Uses Stellar Horizon API
+   - Custom transaction building
+   - Multi-signature support
+   - Automated fee management
 
-### 3.5 IPFS Storage (Optional)
+#### 2.5 Storage Layer
+- Document metadata in PostgreSQL
+- Encrypted documents in S3-compatible storage
+- Redis cache for frequent queries
+- Stellar transaction history
 
-- **Purpose**: Offers decentralized storage for documents if users choose to store the full document.
-- **Key Features**:
-  - Content-addressed storage
-  - Decentralized file system
-  - Integration with main application for document retrieval
+### 3. Stellar-Specific Components
 
-## 4. System Interactions
-
-1. **Notarization Process**:
-   a. User uploads document through the frontend.
-   b. Frontend generates a hash of the document.
-   c. Backend receives the hash and initiates a transaction with the Soroban smart contract.
-   d. Smart contract stores the hash and timestamp on the Stellar blockchain.
-   e. Transaction result is returned to the backend and then to the frontend.
-   f. Frontend displays the notarization proof to the user.
-
-2. **Verification Process**:
-   a. User uploads a document for verification through the frontend.
-   b. Frontend generates a hash of the document.
-   c. Backend receives the hash and queries the Soroban smart contract.
-   d. Smart contract checks the Stellar blockchain for the existence of the hash.
-   e. Verification result is returned to the backend and then to the frontend.
-   f. Frontend displays the verification result to the user.
-
-3. **IPFS Integration (Optional)**:
-   a. If the user chooses to store the document, the frontend sends the document to the backend.
-   b. Backend uploads the document to IPFS and receives a content identifier (CID).
-   c. The CID is stored along with the document hash in the Soroban smart contract.
-
-## 5. Data Flow Diagram
-
-```{.mermaid format=svg}
-graph TD
-    A[User] -->|Upload Document| B(Frontend)
-    B -->|Generate Hash| B
-    B -->|Send Hash| C(Backend)
-    C -->|Initiate Transaction| D(Soroban Smart Contract)
-    D -->|Store Data| E(Stellar Blockchain)
-    E -->|Confirmation| D
-    D -->|Result| C
-    C -->|Notarization Proof| B
-    B -->|Display Result| A
-    A -->|Verify Document| B
-    B -->|Send Hash for Verification| C
-    C -->|Query| D
-    D -->|Check| E
-    E -->|Verification Data| D
-    D -->|Verification Result| C
-    C -->|Verification Status| B
-    B -->|Display Verification| A
-    A -->|Optional: Store Document| B
-    B -->|Send Document| C
-    C -->|Store Document| F[IPFS]
-    F -->|Return CID| C
-    C -->|Store CID| D
+#### 3.1 Account Structure
+```plaintext
+ROOT_ACCOUNT
+├── NOTARY_POOL_ACCOUNT
+│   ├── DOCUMENT_ACCOUNT_1
+│   ├── DOCUMENT_ACCOUNT_2
+│   └── DOCUMENT_ACCOUNT_N
+└── FEE_POOL_ACCOUNT
 ```
 
-## 6. Security Considerations
+#### 3.2 Transaction Flow
+1. Document Upload
+   ```mermaid
+   sequenceDiagram
+     User->>API: Upload Document
+     API->>DocService: Process Document
+     DocService->>StellarService: Generate Hash
+     StellarService->>Stellar: Create Transaction
+     Stellar-->>User: Confirmation
+   ```
 
-1. **Data Encryption**: All communications between components will use HTTPS/TLS encryption.
-2. **Authentication**: JWT-based authentication for user sessions.
-3. **Smart Contract Security**: Rigorous testing and auditing of the Soroban smart contract.
-4. **Private Key Management**: Secure storage and handling of Stellar account private keys.
-5. **Rate Limiting**: Implement API rate limiting to prevent abuse.
+2. Document Verification
+   ```mermaid
+   sequenceDiagram
+     Verifier->>API: Submit Document
+     API->>DocService: Generate Hash
+     DocService->>StellarService: Query Hash
+     StellarService->>Stellar: Verify Transaction
+     Stellar-->>Verifier: Verification Result
+   ```
 
-## 7. Scalability Considerations
+#### 3.3 Stellar Network Usage
 
-1. **Horizontal Scaling**: Design the backend to be stateless, allowing for easy horizontal scaling.
-2. **Caching**: Implement caching mechanisms for frequently accessed data.
-3. **Database Indexing**: Optimize database queries with proper indexing.
-4. **Load Balancing**: Use load balancers to distribute traffic across multiple server instances.
+1. **Transaction Types**
+   - Document Registration: Custom transaction with document hash
+   - Verification Queries: Horizon API calls
+   - Smart Contract Operations: Custom operations
 
-## 8. Monitoring and Logging
+2. **Performance Optimizations**
+   - Batch processing for multiple documents
+   - Channel accounts for high volume
+   - Transaction queue management
+   - Fee optimization strategies
 
-1. **System Monitoring**: Implement comprehensive monitoring for all system components.
-2. **Error Logging**: Centralized error logging and alerting system.
-3. **Performance Metrics**: Track and log key performance indicators.
-4. **Audit Trail**: Maintain a detailed audit trail of all notarization and verification activities.
+3. **Security Measures**
+   - Multi-signature requirements
+   - Threshold settings
+   - Account authorization levels
+   - Key management system
 
-## 9. Disaster Recovery and Backup
+### 4. Scaling Considerations
 
-1. **Regular Backups**: Implement automated, regular backups of all critical data.
-2. **Failover Mechanisms**: Design redundancy and failover mechanisms for critical components.
-3. **Data Replication**: Use data replication techniques to ensure data integrity and availability.
+#### 4.1 Horizontal Scaling
+  - Microservices containerization (Kubernetes)
+  - Load balancing across regions
+  - Database sharding
+  - Cache distribution
+
+#### 4.2 Stellar Network Scaling
+  - Channel accounts for throughput
+  - Batch processing optimization
+  - Transaction queue management
+  - Fee strategy optimization
+
+### 5. Security Architecture
+
+#### 5.1 Document Security
+  - AES-256 encryption
+  - Zero-knowledge proofs
+  - Secure key management
+  - Access control lists
+
+#### 5.2 Blockchain Security
+  - Multi-signature transactions
+  - Hardware Security Module (HSM) integration
+  - Key rotation policies
+  - Transaction monitoring
+
+### 6. Integration Points
+
+#### 6.1 External Systems
+  - Authentication providers
+  - Storage providers
+  - Payment processors
+  - Monitoring systems
+
+#### 6.2 APIs
+```typescript
+interface NotaryAPI {
+  // Document Management
+  uploadDocument(file: File, metadata: Metadata): Promise<UploadResult>;
+  verifyDocument(hash: string): Promise<VerificationResult>;
+  
+  // Stellar Operations
+  submitTransaction(tx: StellarTransaction): Promise<TransactionResult>;
+  queryTransaction(hash: string): Promise<TransactionStatus>;
+  
+  // Account Management
+  createAccount(): Promise<AccountDetails>;
+  manageKeys(account: string, operation: KeyOperation): Promise<KeyResult>;
+}
+```
+
+### 7. Monitoring and Maintenance
+
+#### 7.1 System Monitoring
+  - Performance metrics
+  - Error tracking
+  - Transaction monitoring
+  - Network status
+  - Resource utilization
+
+#### 7.2 Maintenance Procedures
+  - Backup strategies
+  - Recovery procedures
+  - Update processes
+  - Key rotation
+  - Network synchronization
+
+### 8. Development and Deployment
+
+#### 8.1 Development Environment
+  - Local Stellar test network
+  - Development tools
+  - Testing frameworks
+  - CI/CD pipeline
+
+#### 8.2 Production Deployment
+  - Multi-region setup
+  - Failover procedures
+  - Backup systems
+  - Monitoring setup
 

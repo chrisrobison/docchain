@@ -3,7 +3,7 @@
 
 Transform the way you notarize and verify documents with blockchain technology. Secure, instant, and paperless.
 
-[Get Started](#) [Watch Demo](#)
+[Get Started](/content/signup.html) 
 
 ## Why Choose DocChain?
 
@@ -60,7 +60,7 @@ Secure patient records and consent forms with blockchain-backed authenticity.
 
 ## Get Started Today
 
-[Create Free Account](#) [View Pricing](#)
+[Create Account](/content/signup.html) [View Pricing](/content/pricing.html)
 
 ## Trusted By
 [Placeholder for partner/client logos]
@@ -80,13 +80,13 @@ Achieved SOC 2 Type II certification for enhanced security.
 
 Start notarizing documents with blockchain security in minutes.
 
-[Start Free Trial](#) [Contact Sales](#)
+[Create Account](/content/signup.html) [Contact Sales](/content/contact.html)
 
 ---
 
 ## Stay Connected
 
-[Twitter](#) [LinkedIn](#) [GitHub](#) [Blog](#)
+[Twitter](https://x.com/docchainnotary) [LinkedIn](https://www.linkedin.com/company/docchainnotary/) [GitHub](https://github.com/chrisrobison/docchain)
 
 ### Newsletter
 Stay updated with the latest in blockchain notarization.
