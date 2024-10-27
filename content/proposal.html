@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <title>digital-notary</title>
+  <title>proposal</title>
   <style>
     html {
       line-height: 1.5;
@@ -181,52 +178,51 @@
         -khtml-user-select: none; -moz-user-select: none;
         -ms-user-select: none; user-select: none;
         padding: 0 4px; width: 4em;
-        background-color: #232629;
-        color: #7a7c7d;
+        color: #aaaaaa;
       }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
     div.sourceCode
-      { color: #cfcfc2; background-color: #232629; }
+      {   }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span { color: #cfcfc2; } /* Normal */
-    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
-    code span.an { color: #3f8058; } /* Annotation */
-    code span.at { color: #2980b9; } /* Attribute */
-    code span.bn { color: #f67400; } /* BaseN */
-    code span.bu { color: #7f8c8d; } /* BuiltIn */
-    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #3daee9; } /* Char */
-    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
-    code span.co { color: #7a7c7d; } /* Comment */
-    code span.cv { color: #7f8c8d; } /* CommentVar */
-    code span.do { color: #a43340; } /* Documentation */
-    code span.dt { color: #2980b9; } /* DataType */
-    code span.dv { color: #f67400; } /* DecVal */
-    code span.er { color: #da4453; text-decoration: underline; } /* Error */
-    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #f67400; } /* Float */
-    code span.fu { color: #8e44ad; } /* Function */
-    code span.im { color: #27ae60; } /* Import */
-    code span.in { color: #c45b00; } /* Information */
-    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
-    code span.op { color: #cfcfc2; } /* Operator */
-    code span.ot { color: #27ae60; } /* Other */
-    code span.pp { color: #27ae60; } /* Preprocessor */
-    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #da4453; } /* SpecialString */
-    code span.st { color: #f44f4f; } /* String */
-    code span.va { color: #27aeae; } /* Variable */
-    code span.vs { color: #da4453; } /* VerbatimString */
-    code span.wa { color: #da4453; } /* Warning */
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
 </head>
 <body>
-<h3
-id="grant-proposal-decentralized-digital-notary-service-on-stellar-soroban"><strong>Grant
+<header id="title-block-header">
+<h1 class="title">proposal</h1>
+</header>
+<h3 id="grant-proposal-decentralized-digital-notary-service-on-stellar-soroban"><strong>Grant
 Proposal: Decentralized Digital Notary Service on Stellar
 Soroban</strong></h3>
 <p><strong>Project Title:</strong> Decentralized Digital Notary
@@ -260,7 +256,7 @@ specific point in time.</p>
 <h2 id="implementation-details"><strong>Implementation
 Details</strong></h2>
 <h3 id="process-overview"><strong>1. Process Overview</strong></h3>
-<p><img src='img/digital-notary.svg'></p>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNjAwIj4KICA8ZGVmcz4KICAgIDxtYXJrZXIgaWQ9ImFycm93aGVhZCIgbWFya2VyV2lkdGg9IjEwIiBtYXJrZXJIZWlnaHQ9IjciIHJlZlg9IjAiIHJlZlk9IjMuNSIgb3JpZW50PSJhdXRvIj4KICAgICAgPHBvbHlnb24gcG9pbnRzPSIwIDAsIDEwIDMuNSwgMCA3IiBmaWxsPSIjMzMzIi8+CiAgICA8L21hcmtlcj4KICA8L2RlZnM+CiAgCiAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmMGYwZjAiLz4KICAKICA8IS0tIFRpdGxlIC0tPgogIDx0ZXh0IHg9IjQwMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiPkRlY2VudHJhbGl6ZWQgRGlnaXRhbCBOb3RhcnkgUHJvY2VzczwvdGV4dD4KICAKICA8IS0tIE5vdGFyaXphdGlvbiBQcm9jZXNzIC0tPgogIDx0ZXh0IHg9IjQwMCIgeT0iNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiPk5vdGFyaXphdGlvbjwvdGV4dD4KICAKICA8IS0tIFVzZXIgLS0+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTUwIiByPSI0MCIgZmlsbD0iIzRDQUY1MCIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMTU1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5Vc2VyPC90ZXh0PgogIAogIDwhLS0gRG9jdW1lbnQgLS0+CiAgPHJlY3QgeD0iMjIwIiB5PSIxMjAiIHdpZHRoPSI2MCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzIxOTZGMyIvPgogIDx0ZXh0IHg9IjI1MCIgeT0iMTY1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5Eb2N1bWVudDwvdGV4dD4KICAKICA8IS0tIEhhc2ggRnVuY3Rpb24gLS0+CiAgPHJlY3QgeD0iMzYwIiB5PSIxMjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0ZGQzEwNyIgcng9IjEwIiByeT0iMTAiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjE1NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+SGFzaDwvdGV4dD4KICAKICA8IS0tIFNtYXJ0IENvbnRyYWN0IC0tPgogIDxyZWN0IHg9IjUyMCIgeT0iMTEwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjOUMyN0IwIiByeD0iMTUiIHJ5PSIxNSIvPgogIDx0ZXh0IHg9IjU3MCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5TbWFydDwvdGV4dD4KICA8dGV4dCB4PSI1NzAiIHk9IjE3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q29udHJhY3Q8L3RleHQ+CiAgCiAgPCEtLSBCbG9ja2NoYWluIC0tPgogIDxyZWN0IHg9IjcwMCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNGRjU3MjIiLz4KICA8dGV4dCB4PSI3MzAiIHk9IjE1NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDczMCAxNTUpIj5CbG9ja2NoYWluPC90ZXh0PgogIAogIDwhLS0gTm90YXJpemF0aW9uIEFycm93cyAtLT4KICA8bGluZSB4MT0iMTQwIiB5MT0iMTUwIiB4Mj0iMjEwIiB5Mj0iMTUwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvd2hlYWQpIi8+CiAgPGxpbmUgeDE9IjI5MCIgeTE9IjE1MCIgeDI9IjM1MCIgeTI9IjE1MCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3doZWFkKSIvPgogIDxsaW5lIHgxPSI0NTAiIHkxPSIxNTAiIHgyPSI1MTAiIHkyPSIxNTAiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93aGVhZCkiLz4KICA8bGluZSB4MT0iNjMwIiB5MT0iMTUwIiB4Mj0iNjkwIiB5Mj0iMTUwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvd2hlYWQpIi8+CiAgCiAgPCEtLSBOb3Rhcml6YXRpb24gTGFiZWxzIC0tPgogIDx0ZXh0IHg9IjE3NSIgeT0iMTQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiPjEuIFVwbG9hZDwvdGV4dD4KICA8dGV4dCB4PSIzMjAiIHk9IjE0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIj4yLiBHZW5lcmF0ZTwvdGV4dD4KICA8dGV4dCB4PSI0ODAiIHk9IjE0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIj4zLiBOb3Rhcml6ZTwvdGV4dD4KICA8dGV4dCB4PSI2NjAiIHk9IjE0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIj40LiBTdG9yZTwvdGV4dD4KICAKICA8IS0tIFZlcmlmaWNhdGlvbiBQcm9jZXNzIC0tPgogIDx0ZXh0IHg9IjQwMCIgeT0iMjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSJib2xkIj5WZXJpZmljYXRpb248L3RleHQ+CiAgCiAgPCEtLSBWZXJpZmllciAtLT4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIzNTAiIHI9IjQwIiBmaWxsPSIjRTkxRTYzIi8+CiAgPHRleHQgeD0iMTAwIiB5PSIzNTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiPlZlcmlmaWVyPC90ZXh0PgogIAogIDwhLS0gRG9jdW1lbnQgdG8gVmVyaWZ5IC0tPgogIDxyZWN0IHg9IjIyMCIgeT0iMzIwIiB3aWR0aD0iNjAiIGhlaWdodD0iODAiIGZpbGw9IiMwM0E5RjQiLz4KICA8dGV4dCB4PSIyNTAiIHk9IjM1NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+RG9jdW1lbnQ8L3RleHQ+CiAgPHRleHQgeD0iMjUwIiB5PSIzNzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiPnRvIFZlcmlmeTwvdGV4dD4KICAKICA8IS0tIEhhc2ggRnVuY3Rpb24gKFZlcmlmaWNhdGlvbikgLS0+CiAgPHJlY3QgeD0iMzYwIiB5PSIzMjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0ZGRUIzQiIgcng9IjEwIiByeT0iMTAiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjM1NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+SGFzaDwvdGV4dD4KICAKICA8IS0tIFNtYXJ0IENvbnRyYWN0IChWZXJpZmljYXRpb24pIC0tPgogIDxyZWN0IHg9IjUyMCIgeT0iMzEwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjNjczQUI3IiByeD0iMTUiIHJ5PSIxNSIvPgogIDx0ZXh0IHg9IjU3MCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5TbWFydDwvdGV4dD4KICA8dGV4dCB4PSI1NzAiIHk9IjM3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q29udHJhY3Q8L3RleHQ+CiAgCiAgPCEtLSBCbG9ja2NoYWluIChWZXJpZmljYXRpb24pIC0tPgogIDxyZWN0IHg9IjcwMCIgeT0iMjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRkY5ODAwIi8+CiAgPHRleHQgeD0iNzMwIiB5PSIzNTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIHRyYW5zZm9ybT0icm90YXRlKC05MCA3MzAgMzU1KSI+QmxvY2tjaGFpbjwvdGV4dD4KICAKICA8IS0tIFZlcmlmaWNhdGlvbiBBcnJvd3MgLS0+CiAgPGxpbmUgeDE9IjE0MCIgeTE9IjM1MCIgeDI9IjIxMCIgeTI9IjM1MCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3doZWFkKSIvPgogIDxsaW5lIHgxPSIyOTAiIHkxPSIzNTAiIHgyPSIzNTAiIHkyPSIzNTAiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93aGVhZCkiLz4KICA8bGluZSB4MT0iNDUwIiB5MT0iMzUwIiB4Mj0iNTEwIiB5Mj0iMzUwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvd2hlYWQpIi8+CiAgPGxpbmUgeDE9IjYzMCIgeTE9IjM1MCIgeDI9IjY5MCIgeTI9IjM1MCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3doZWFkKSIvPgogIDxwYXRoIGQ9Ik0gNjkwIDM3MCBRIDY1MCA0MDAgNTcwIDQwMCBRIDQ5MCA0MDAgNDUwIDM3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3doZWFkKSIvPgogIAogIDwhLS0gVmVyaWZpY2F0aW9uIExhYmVscyAtLT4KICA8dGV4dCB4PSIxNzUiIHk9IjM0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIj4xLiBTdWJtaXQ8L3RleHQ+CiAgPHRleHQgeD0iMzIwIiB5PSIzNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiI+Mi4gR2VuZXJhdGU8L3RleHQ+CiAgPHRleHQgeD0iNDgwIiB5PSIzNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiI+My4gUXVlcnk8L3RleHQ+CiAgPHRleHQgeD0iNjYwIiB5PSIzNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiI+NC4gQ2hlY2s8L3RleHQ+CiAgPHRleHQgeD0iNTcwIiB5PSI0MjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiI+NS4gVmVyaWZ5PC90ZXh0Pgo8L3N2Zz4K"></p>
 <h3 id="soroban-smart-contract-development"><strong>2. Soroban Smart
 Contract Development</strong></h3>
 <p><strong>Smart Contract Logic:</strong></p>
@@ -271,8 +267,7 @@ blockchain. - Provide methods for notarization and verification.</p>
 <p><strong>Code Overview:</strong></p>
 <p>Below is a simplified version of the Soroban smart contract code in
 Rust:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode rust"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">#![</span>no_std<span class="at">]</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">#![</span>no_std<span class="at">]</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> <span class="kw">crate</span> soroban_sdk<span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">soroban_sdk::</span><span class="op">{</span>contractimpl<span class="op">,</span> Env<span class="op">,</span> BytesN<span class="op">,</span> Address<span class="op">};</span></span>
@@ -326,8 +321,7 @@ to verify its notarization status.</li>
 </ul>
 <p><strong>Frontend Code Snippet (React with Web3
 Integration):</strong></p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> SorobanSdk <span class="im">from</span> <span class="st">&#39;soroban-sdk&#39;</span><span class="op">;</span> <span class="co">// Hypothetical SDK for interacting with Soroban contracts</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">NotaryApp</span>() {</span>

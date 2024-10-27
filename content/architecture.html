@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>digital-notary-arch</title>
+  <title>architecture</title>
   <style>
     html {
       line-height: 1.5;
@@ -152,176 +152,315 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
 </head>
 <body>
-<h1
-id="system-architecture-document-decentralized-digital-notary-service">System
-Architecture Document: Decentralized Digital Notary Service</h1>
-<h2 id="introduction">1. Introduction</h2>
-<p>This document outlines the system architecture for the Decentralized
-Digital Notary Service built on the Stellar blockchain using Soroban
-smart contracts. The service aims to provide a secure, transparent, and
-tamper-proof notarization solution for digital documents.</p>
-<h2 id="system-overview">2. System Overview</h2>
-<p>The Decentralized Digital Notary Service consists of the following
-main components:</p>
+<header id="title-block-header">
+<h1 class="title">architecture</h1>
+</header>
+<h1 id="docchain-technical-architecture">DocChain Technical
+Architecture</h1>
+<h2 id="system-architecture-stellar-integration-specification">System
+Architecture &amp; Stellar Integration Specification</h2>
+<h3 id="system-overview">1. System Overview</h3>
+<p>DocChain is built on a microservices architecture with Stellar
+blockchain integration for document notarization and verification. The
+system consists of five primary components:</p>
+<h4 id="core-components">Core Components</h4>
 <ol type="1">
-<li>User Interface (Frontend)</li>
-<li>Application Server (Backend)</li>
-<li>Soroban Smart Contract</li>
-<li>Stellar Blockchain Network</li>
-<li>IPFS Storage (Optional)</li>
+<li>User Interface Layer</li>
+<li>API Gateway</li>
+<li>Document Processing Service</li>
+<li>Blockchain Service</li>
+<li>Storage Layer</li>
 </ol>
-<h2 id="component-description">3. Component Description</h2>
-<h3 id="user-interface-frontend">3.1 User Interface (Frontend)</h3>
+<h3 id="detailed-architecture">2. Detailed Architecture</h3>
+<h4 id="user-interface-layer">2.1 User Interface Layer</h4>
 <ul>
-<li><strong>Technology</strong>: React.js</li>
-<li><strong>Purpose</strong>: Provides a user-friendly interface for
-document upload, notarization, and verification.</li>
-<li><strong>Key Features</strong>:
-<ul>
-<li>Document upload and hashing</li>
-<li>Notarization request initiation</li>
-<li>Verification request handling</li>
-<li>Display of notarization proofs and verification results</li>
-</ul></li>
+<li>React-based web application</li>
+<li>Progressive Web App (PWA) capabilities</li>
+<li>WebSocket integration for real-time status updates</li>
+<li>Client-side document hashing</li>
 </ul>
-<h3 id="application-server-backend">3.2 Application Server
-(Backend)</h3>
+<p><strong>Security Features:</strong></p>
 <ul>
-<li><strong>Technology</strong>: Node.js with Express.js</li>
-<li><strong>Purpose</strong>: Handles API requests from the frontend,
-interacts with the Soroban smart contract, and manages user
-authentication.</li>
-<li><strong>Key Features</strong>:
-<ul>
-<li>RESTful API endpoints</li>
-<li>User authentication and management</li>
-<li>Integration with Stellar SDK for blockchain interactions</li>
-<li>Document hash generation and validation</li>
-</ul></li>
+<li>End-to-end encryption</li>
+<li>Multi-factor authentication</li>
+<li>JWT-based session management</li>
 </ul>
-<h3 id="soroban-smart-contract">3.3 Soroban Smart Contract</h3>
+<h4 id="api-gateway-node.js">2.2 API Gateway (Node.js)</h4>
 <ul>
-<li><strong>Technology</strong>: Rust</li>
-<li><strong>Purpose</strong>: Implements the core notarization and
-verification logic on the Stellar blockchain.</li>
-<li><strong>Key Features</strong>:
-<ul>
-<li>Notarization function to store document hashes</li>
-<li>Verification function to check the existence of notarized
-documents</li>
-<li>Timestamp recording for each notarization</li>
-</ul></li>
+<li>REST API endpoints</li>
+<li>Rate limiting</li>
+<li>Request validation</li>
+<li>Load balancing</li>
+<li>API versioning</li>
 </ul>
-<h3 id="stellar-blockchain-network">3.4 Stellar Blockchain Network</h3>
+<h4 id="document-processing-service-python">2.3 Document Processing
+Service (Python)</h4>
 <ul>
-<li><strong>Purpose</strong>: Provides a decentralized, immutable ledger
-for storing notarization records.</li>
-<li><strong>Key Features</strong>:
-<ul>
-<li>Consensus mechanism for transaction validation</li>
-<li>Decentralized storage of notarization data</li>
-<li>Public verifiability of transactions</li>
-</ul></li>
+<li>Document validation</li>
+<li>Format conversion</li>
+<li>Metadata extraction</li>
+<li>Hash generation (SHA-256)</li>
+<li>Smart contract interaction</li>
 </ul>
-<h3 id="ipfs-storage-optional">3.5 IPFS Storage (Optional)</h3>
+<h4 id="blockchain-service-stellar-integration">2.4 Blockchain Service
+(Stellar Integration)</h4>
+<h5 id="core-functionality">Core Functionality</h5>
 <ul>
-<li><strong>Purpose</strong>: Offers decentralized storage for documents
-if users choose to store the full document.</li>
-<li><strong>Key Features</strong>:
-<ul>
-<li>Content-addressed storage</li>
-<li>Decentralized file system</li>
-<li>Integration with main application for document retrieval</li>
-</ul></li>
+<li>Smart contract deployment and management</li>
+<li>Transaction submission</li>
+<li>Hash verification</li>
+<li>Network status monitoring</li>
 </ul>
-<h2 id="system-interactions">4. System Interactions</h2>
+<h5 id="stellar-integration-details">Stellar Integration Details</h5>
 <ol type="1">
-<li><strong>Notarization Process</strong>:
-<ol type="a">
-<li>User uploads document through the frontend.</li>
-<li>Frontend generates a hash of the document.</li>
-<li>Backend receives the hash and initiates a transaction with the
-Soroban smart contract.</li>
-<li>Smart contract stores the hash and timestamp on the Stellar
-blockchain.</li>
-<li>Transaction result is returned to the backend and then to the
-frontend.</li>
-<li>Frontend displays the notarization proof to the user.</li>
-</ol></li>
-<li><strong>Verification Process</strong>:
-<ol type="a">
-<li>User uploads a document for verification through the frontend.</li>
-<li>Frontend generates a hash of the document.</li>
-<li>Backend receives the hash and queries the Soroban smart
-contract.</li>
-<li>Smart contract checks the Stellar blockchain for the existence of
-the hash.</li>
-<li>Verification result is returned to the backend and then to the
-frontend.</li>
-<li>Frontend displays the verification result to the user.</li>
-</ol></li>
-<li><strong>IPFS Integration (Optional)</strong>:
-<ol type="a">
-<li>If the user chooses to store the document, the frontend sends the
-document to the backend.</li>
-<li>Backend uploads the document to IPFS and receives a content
-identifier (CID).</li>
-<li>The CID is stored along with the document hash in the Soroban smart
-contract.</li>
-</ol></li>
+<li><p><strong>Transaction Management</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> StellarTransaction {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  sourceAccount<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  documentHash<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  timestamp<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  metadata<span class="op">:</span> {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    documentType<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    version<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    validationRules<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<li><p><strong>Smart Contract Implementation</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NotaryContract {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stellar account for the contract</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> contractAccount<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Document registration</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">async</span> <span class="fu">registerDocument</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    hash<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    metadata<span class="op">:</span> DocumentMetadata</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  )<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>Transaction<span class="op">&gt;</span> {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Create Stellar transaction</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add document hash as memo</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Sign and submit</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Document verification</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">async</span> <span class="fu">verifyDocument</span>(</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    hash<span class="op">:</span> <span class="dt">string</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  )<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>VerificationResult<span class="op">&gt;</span> {</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Query Stellar network</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Verify hash existence</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return verification status</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<li><p><strong>Network Integration</strong></p>
+<ul>
+<li>Uses Stellar Horizon API</li>
+<li>Custom transaction building</li>
+<li>Multi-signature support</li>
+<li>Automated fee management</li>
+</ul></li>
 </ol>
-<h2 id="data-flow-diagram">5. Data Flow Diagram</h2>
-<p><img
-src="data:image/svg+xml;base64,PHN2ZyBhcmlhLXJvbGVkZXNjcmlwdGlvbj0iZmxvd2NoYXJ0LXYyIiByb2xlPSJncmFwaGljcy1kb2N1bWVudCBkb2N1bWVudCIgdmlld0JveD0iLTggLTggNzgzLjIxNDg0Mzc1IDQ1MyIgc3R5bGU9Im1heC13aWR0aDogNzgzLjIxNXB4OyBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTsiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBpZD0ibXktc3ZnIj48c3R5bGU+I215LXN2Z3tmb250LWZhbWlseToidHJlYnVjaGV0IG1zIix2ZXJkYW5hLGFyaWFsLHNhbnMtc2VyaWY7Zm9udC1zaXplOjE2cHg7ZmlsbDojMzMzO30jbXktc3ZnIC5lcnJvci1pY29ue2ZpbGw6IzU1MjIyMjt9I215LXN2ZyAuZXJyb3ItdGV4dHtmaWxsOiM1NTIyMjI7c3Ryb2tlOiM1NTIyMjI7fSNteS1zdmcgLmVkZ2UtdGhpY2tuZXNzLW5vcm1hbHtzdHJva2Utd2lkdGg6MnB4O30jbXktc3ZnIC5lZGdlLXRoaWNrbmVzcy10aGlja3tzdHJva2Utd2lkdGg6My41cHg7fSNteS1zdmcgLmVkZ2UtcGF0dGVybi1zb2xpZHtzdHJva2UtZGFzaGFycmF5OjA7fSNteS1zdmcgLmVkZ2UtcGF0dGVybi1kYXNoZWR7c3Ryb2tlLWRhc2hhcnJheTozO30jbXktc3ZnIC5lZGdlLXBhdHRlcm4tZG90dGVke3N0cm9rZS1kYXNoYXJyYXk6Mjt9I215LXN2ZyAubWFya2Vye2ZpbGw6IzMzMzMzMztzdHJva2U6IzMzMzMzMzt9I215LXN2ZyAubWFya2VyLmNyb3Nze3N0cm9rZTojMzMzMzMzO30jbXktc3ZnIHN2Z3tmb250LWZhbWlseToidHJlYnVjaGV0IG1zIix2ZXJkYW5hLGFyaWFsLHNhbnMtc2VyaWY7Zm9udC1zaXplOjE2cHg7fSNteS1zdmcgLmxhYmVse2ZvbnQtZmFtaWx5OiJ0cmVidWNoZXQgbXMiLHZlcmRhbmEsYXJpYWwsc2Fucy1zZXJpZjtjb2xvcjojMzMzO30jbXktc3ZnIC5jbHVzdGVyLWxhYmVsIHRleHR7ZmlsbDojMzMzO30jbXktc3ZnIC5jbHVzdGVyLWxhYmVsIHNwYW4sI215LXN2ZyBwe2NvbG9yOiMzMzM7fSNteS1zdmcgLmxhYmVsIHRleHQsI215LXN2ZyBzcGFuLCNteS1zdmcgcHtmaWxsOiMzMzM7Y29sb3I6IzMzMzt9I215LXN2ZyAubm9kZSByZWN0LCNteS1zdmcgLm5vZGUgY2lyY2xlLCNteS1zdmcgLm5vZGUgZWxsaXBzZSwjbXktc3ZnIC5ub2RlIHBvbHlnb24sI215LXN2ZyAubm9kZSBwYXRoe2ZpbGw6I0VDRUNGRjtzdHJva2U6IzkzNzBEQjtzdHJva2Utd2lkdGg6MXB4O30jbXktc3ZnIC5mbG93Y2hhcnQtbGFiZWwgdGV4dHt0ZXh0LWFuY2hvcjptaWRkbGU7fSNteS1zdmcgLm5vZGUgLmthdGV4IHBhdGh7ZmlsbDojMDAwO3N0cm9rZTojMDAwO3N0cm9rZS13aWR0aDoxcHg7fSNteS1zdmcgLm5vZGUgLmxhYmVse3RleHQtYWxpZ246Y2VudGVyO30jbXktc3ZnIC5ub2RlLmNsaWNrYWJsZXtjdXJzb3I6cG9pbnRlcjt9I215LXN2ZyAuYXJyb3doZWFkUGF0aHtmaWxsOiMzMzMzMzM7fSNteS1zdmcgLmVkZ2VQYXRoIC5wYXRoe3N0cm9rZTojMzMzMzMzO3N0cm9rZS13aWR0aDoyLjBweDt9I215LXN2ZyAuZmxvd2NoYXJ0LWxpbmt7c3Ryb2tlOiMzMzMzMzM7ZmlsbDpub25lO30jbXktc3ZnIC5lZGdlTGFiZWx7YmFja2dyb3VuZC1jb2xvcjojZThlOGU4O3RleHQtYWxpZ246Y2VudGVyO30jbXktc3ZnIC5lZGdlTGFiZWwgcmVjdHtvcGFjaXR5OjAuNTtiYWNrZ3JvdW5kLWNvbG9yOiNlOGU4ZTg7ZmlsbDojZThlOGU4O30jbXktc3ZnIC5sYWJlbEJrZ3tiYWNrZ3JvdW5kLWNvbG9yOnJnYmEoMjMyLCAyMzIsIDIzMiwgMC41KTt9I215LXN2ZyAuY2x1c3RlciByZWN0e2ZpbGw6I2ZmZmZkZTtzdHJva2U6I2FhYWEzMztzdHJva2Utd2lkdGg6MXB4O30jbXktc3ZnIC5jbHVzdGVyIHRleHR7ZmlsbDojMzMzO30jbXktc3ZnIC5jbHVzdGVyIHNwYW4sI215LXN2ZyBwe2NvbG9yOiMzMzM7fSNteS1zdmcgZGl2Lm1lcm1haWRUb29sdGlwe3Bvc2l0aW9uOmFic29sdXRlO3RleHQtYWxpZ246Y2VudGVyO21heC13aWR0aDoyMDBweDtwYWRkaW5nOjJweDtmb250LWZhbWlseToidHJlYnVjaGV0IG1zIix2ZXJkYW5hLGFyaWFsLHNhbnMtc2VyaWY7Zm9udC1zaXplOjEycHg7YmFja2dyb3VuZDpoc2woODAsIDEwMCUsIDk2LjI3NDUwOTgwMzklKTtib3JkZXI6MXB4IHNvbGlkICNhYWFhMzM7Ym9yZGVyLXJhZGl1czoycHg7cG9pbnRlci1ldmVudHM6bm9uZTt6LWluZGV4OjEwMDt9I215LXN2ZyAuZmxvd2NoYXJ0VGl0bGVUZXh0e3RleHQtYW5jaG9yOm1pZGRsZTtmb250LXNpemU6MThweDtmaWxsOiMzMzM7fSNteS1zdmcgOnJvb3R7LS1tZXJtYWlkLWZvbnQtZmFtaWx5OiJ0cmVidWNoZXQgbXMiLHZlcmRhbmEsYXJpYWwsc2Fucy1zZXJpZjt9PC9zdHlsZT48Zz48bWFya2VyIG9yaWVudD0iYXV0byIgbWFya2VySGVpZ2h0PSIxMiIgbWFya2VyV2lkdGg9IjEyIiBtYXJrZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIHJlZlk9IjUiIHJlZlg9IjYiIHZpZXdCb3g9IjAgMCAxMCAxMCIgY2xhc3M9Im1hcmtlciBmbG93Y2hhcnQiIGlkPSJteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kIj48cGF0aCBzdHlsZT0ic3Ryb2tlLXdpZHRoOiAxOyBzdHJva2UtZGFzaGFycmF5OiAxLCAwOyIgY2xhc3M9ImFycm93TWFya2VyUGF0aCIgZD0iTSAwIDAgTCAxMCA1IEwgMCAxMCB6Ii8+PC9tYXJrZXI+PG1hcmtlciBvcmllbnQ9ImF1dG8iIG1hcmtlckhlaWdodD0iMTIiIG1hcmtlcldpZHRoPSIxMiIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiByZWZZPSI1IiByZWZYPSI0LjUiIHZpZXdCb3g9IjAgMCAxMCAxMCIgY2xhc3M9Im1hcmtlciBmbG93Y2hhcnQiIGlkPSJteS1zdmdfZmxvd2NoYXJ0LXBvaW50U3RhcnQiPjxwYXRoIHN0eWxlPSJzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IDEsIDA7IiBjbGFzcz0iYXJyb3dNYXJrZXJQYXRoIiBkPSJNIDAgNSBMIDEwIDEwIEwgMTAgMCB6Ii8+PC9tYXJrZXI+PG1hcmtlciBvcmllbnQ9ImF1dG8iIG1hcmtlckhlaWdodD0iMTEiIG1hcmtlcldpZHRoPSIxMSIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiByZWZZPSI1IiByZWZYPSIxMSIgdmlld0JveD0iMCAwIDEwIDEwIiBjbGFzcz0ibWFya2VyIGZsb3djaGFydCIgaWQ9Im15LXN2Z19mbG93Y2hhcnQtY2lyY2xlRW5kIj48Y2lyY2xlIHN0eWxlPSJzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IDEsIDA7IiBjbGFzcz0iYXJyb3dNYXJrZXJQYXRoIiByPSI1IiBjeT0iNSIgY3g9IjUiLz48L21hcmtlcj48bWFya2VyIG9yaWVudD0iYXV0byIgbWFya2VySGVpZ2h0PSIxMSIgbWFya2VyV2lkdGg9IjExIiBtYXJrZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIHJlZlk9IjUiIHJlZlg9Ii0xIiB2aWV3Qm94PSIwIDAgMTAgMTAiIGNsYXNzPSJtYXJrZXIgZmxvd2NoYXJ0IiBpZD0ibXktc3ZnX2Zsb3djaGFydC1jaXJjbGVTdGFydCI+PGNpcmNsZSBzdHlsZT0ic3Ryb2tlLXdpZHRoOiAxOyBzdHJva2UtZGFzaGFycmF5OiAxLCAwOyIgY2xhc3M9ImFycm93TWFya2VyUGF0aCIgcj0iNSIgY3k9IjUiIGN4PSI1Ii8+PC9tYXJrZXI+PG1hcmtlciBvcmllbnQ9ImF1dG8iIG1hcmtlckhlaWdodD0iMTEiIG1hcmtlcldpZHRoPSIxMSIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiByZWZZPSI1LjIiIHJlZlg9IjEyIiB2aWV3Qm94PSIwIDAgMTEgMTEiIGNsYXNzPSJtYXJrZXIgY3Jvc3MgZmxvd2NoYXJ0IiBpZD0ibXktc3ZnX2Zsb3djaGFydC1jcm9zc0VuZCI+PHBhdGggc3R5bGU9InN0cm9rZS13aWR0aDogMjsgc3Ryb2tlLWRhc2hhcnJheTogMSwgMDsiIGNsYXNzPSJhcnJvd01hcmtlclBhdGgiIGQ9Ik0gMSwxIGwgOSw5IE0gMTAsMSBsIC05LDkiLz48L21hcmtlcj48bWFya2VyIG9yaWVudD0iYXV0byIgbWFya2VySGVpZ2h0PSIxMSIgbWFya2VyV2lkdGg9IjExIiBtYXJrZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIHJlZlk9IjUuMiIgcmVmWD0iLTEiIHZpZXdCb3g9IjAgMCAxMSAxMSIgY2xhc3M9Im1hcmtlciBjcm9zcyBmbG93Y2hhcnQiIGlkPSJteS1zdmdfZmxvd2NoYXJ0LWNyb3NzU3RhcnQiPjxwYXRoIHN0eWxlPSJzdHJva2Utd2lkdGg6IDI7IHN0cm9rZS1kYXNoYXJyYXk6IDEsIDA7IiBjbGFzcz0iYXJyb3dNYXJrZXJQYXRoIiBkPSJNIDEsMSBsIDksOSBNIDEwLDEgbCAtOSw5Ii8+PC9tYXJrZXI+PGcgY2xhc3M9InJvb3QiPjxnIGNsYXNzPSJjbHVzdGVycyIvPjxnIGNsYXNzPSJlZGdlUGF0aHMiPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1BIExFLUIiIGlkPSJMLUEtQi0wIiBkPSJNMzU4LjQ3MywyMC4zNjNMMzA5LjQsMjguMTM2QzI2MC4zMjgsMzUuOTA5LDE2Mi4xODQsNTEuNDU0LDE1Ny44MjUsNjYuNDQxQzE1My40NjYsODEuNDI3LDI0Mi44OTIsOTUuODUzLDI4Ny42MDUsMTAzLjA2N0wzMzIuMzE4LDExMC4yOCIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1CIExFLUIiIGlkPSJMLUItQi0wIiBkPSJNNDE2LjU5OCwxMTAuOTE1TDQyNi41MTUsMTA5LjI2MkM0MzYuNDMzLDEwNy42MSw0NTYuMjY4LDEwNC4zMDUsNDY4LjY2NSwxMDIuNjUyQzQ4MS4wNjIsMTAxLDQ4Ni4wMiwxMDEsNDkwLjk3OSwxMDMuNzVDNDk1LjkzOCwxMDYuNSw1MDAuODk3LDExMiw1MDAuODk3LDExNy41QzUwMC44OTcsMTIzLDQ5NS45MzgsMTI4LjUsNDkwLjk3OSwxMzEuMjVDNDg2LjAyLDEzNCw0ODEuMDYyLDEzNCw0NjkuNTM2LDEzMi40OTNDNDU4LjAxLDEzMC45ODUsNDM5LjkxOCwxMjcuOTcxLDQzMC44NzIsMTI2LjQ2NEw0MjEuODI2LDEyNC45NTYiLz48cGF0aCBtYXJrZXItZW5kPSJ1cmwoI215LXN2Z19mbG93Y2hhcnQtcG9pbnRFbmQpIiBzdHlsZT0iZmlsbDpub25lOyIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZmxvd2NoYXJ0LWxpbmsgTFMtQiBMRS1DIiBpZD0iTC1CLUMtMCIgZD0iTTMzNy41NTEsMTIzLjk1OEwyOTIuNjMsMTMxLjI5OUMyNDcuNzEsMTM4LjYzOSwxNTcuODY4LDE1My4zMTksMTU5LjkyNSwxNjcuOTQzQzE2MS45ODEsMTgyLjU2NiwyNTUuOTM0LDE5Ny4xMzIsMzAyLjkxMSwyMDQuNDE1TDM0OS44ODgsMjExLjY5OSIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1DIExFLUQiIGlkPSJMLUMtRC0wIiBkPSJNMzU1LjEyNSwyMjUuMDc4TDMxMi4xMzMsMjMyLjM5OEMyNjkuMTQyLDIzOS43MTksMTgzLjE1OSwyNTQuMzU5LDE1OC4xMDgsMjY3LjA5MUMxMzMuMDU4LDI3OS44MjMsMTY4LjkzOSwyOTAuNjQ2LDE4Ni44OCwyOTYuMDU4TDIwNC44MjEsMzAxLjQ2OSIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1EIExFLUUiIGlkPSJMLUQtRS0wIiBkPSJNMjI3LjAzNywzMzZMMjE0LjEzOCwzNDEuNjY3QzIwMS4yMzksMzQ3LjMzMywxNzUuNDQsMzU4LjY2NywxNzIuMjY3LDM2OS41ODFDMTY5LjA5NSwzODAuNDk1LDE4OC41NDksMzkwLjk4OSwxOTguMjc2LDM5Ni4yMzZMMjA4LjAwMyw0MDEuNDg0Ii8+PHBhdGggbWFya2VyLWVuZD0idXJsKCNteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kKSIgc3R5bGU9ImZpbGw6bm9uZTsiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIExTLUUgTEUtRCIgaWQ9IkwtRS1ELTAiIGQ9Ik0yNjcuODcsNDA0TDI3Ni4zMjQsMzk4LjMzM0MyODQuNzc4LDM5Mi42NjcsMzAxLjY4NiwzODEuMzMzLDMwNC43MjYsMzcwLjYwM0MzMDcuNzY2LDM1OS44NzMsMjk2LjkzOCwzNDkuNzQ3LDI5MS41MjUsMzQ0LjY4NEwyODYuMTExLDMzOS42MiIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1EIExFLUMiIGlkPSJMLUQtQy0wIiBkPSJNMjk2LjA0MSwzMDNMMzA2LjgzOSwyOTcuMzMzQzMxNy42MzgsMjkxLjY2NywzMzkuMjM1LDI4MC4zMzMsMzUzLjI0NiwyNjkuNzRDMzY3LjI1NiwyNTkuMTQ3LDM3My42ODEsMjQ5LjI5MywzNzYuODkzLDI0NC4zNjZMMzgwLjEwNSwyMzkuNDQiLz48cGF0aCBtYXJrZXItZW5kPSJ1cmwoI215LXN2Z19mbG93Y2hhcnQtcG9pbnRFbmQpIiBzdHlsZT0iZmlsbDpub25lOyIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZmxvd2NoYXJ0LWxpbmsgTFMtQyBMRS1CIiBpZD0iTC1DLUItMCIgZD0iTTQzMi4zOTEsMjA0LjMyNEw0NDguODg5LDE5OC4yN0M0NjUuMzg3LDE5Mi4yMTYsNDk4LjM4MywxODAuMTA4LDQ5Ni41OSwxNjguMDY4QzQ5NC43OTgsMTU2LjAyOCw0NTguMjE2LDE0NC4wNTYsNDM5LjkyNSwxMzguMDdMNDIxLjYzNSwxMzIuMDg0Ii8+PHBhdGggbWFya2VyLWVuZD0idXJsKCNteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kKSIgc3R5bGU9ImZpbGw6bm9uZTsiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIExTLUIgTEUtQSIgaWQ9IkwtQi1BLTAiIGQ9Ik00MTYuNTk4LDEwNS4zMDFMNDM3LjI4MSw5OC45MThDNDU3Ljk2NCw5Mi41MzQsNDk5LjMyOSw3OS43NjcsNDk4LjYxMyw2Ni41MzdDNDk3Ljg5Nyw1My4zMDYsNDU1LjEsMzkuNjEzLDQzMy43MDEsMzIuNzY2TDQxMi4zMDIsMjUuOTE5Ii8+PHBhdGggbWFya2VyLWVuZD0idXJsKCNteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kKSIgc3R5bGU9ImZpbGw6bm9uZTsiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIExTLUEgTEUtQiIgaWQ9IkwtQS1CLTEiIGQ9Ik0zNTguNDczLDIzLjQ5NUwzMzMuMTg5LDMwLjc0NkMzMDcuOTA2LDM3Ljk5NywyNTcuMzQsNTIuNDk4LDI1My4wMDYsNjUuOTYxQzI0OC42NzIsNzkuNDI0LDI5MC41NzEsOTEuODQ5LDMxMS41Miw5OC4wNjFMMzMyLjQ2OSwxMDQuMjczIi8+PHBhdGggbWFya2VyLWVuZD0idXJsKCNteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kKSIgc3R5bGU9ImZpbGw6bm9uZTsiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIExTLUIgTEUtQyIgaWQ9IkwtQi1DLTEiIGQ9Ik0zMzcuNTUxLDEzMC4yMTZMMzE3Ljk3OCwxMzYuNTEzQzI5OC40MDUsMTQyLjgxMSwyNTkuMjU5LDE1NS40MDUsMjYxLjM0LDE2OEMyNjMuNDIxLDE4MC41OTUsMzA2LjcyOCwxOTMuMTksMzI4LjM4MiwxOTkuNDg3TDM1MC4wMzYsMjA1Ljc4NSIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1DIExFLUQiIGlkPSJMLUMtRC0xIiBkPSJNMzU1LjEyNSwyMjguODk3TDMzMC4yOSwyMzUuNTgxQzMwNS40NTQsMjQyLjI2NSwyNTUuNzg0LDI1NS42MzIsMjM2Ljg0MywyNjcuNDA2QzIxNy45MDEsMjc5LjE3OSwyMjkuNjg5LDI4OS4zNTcsMjM1LjU4MywyOTQuNDQ3TDI0MS40NzcsMjk5LjUzNiIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1EIExFLUUiIGlkPSJMLUQtRS0xIiBkPSJNMjUzLjQ3NywzMzZMMjQ5LjY1OCwzNDEuNjY3QzI0NS44MzksMzQ3LjMzMywyMzguMjAxLDM1OC42NjcsMjM1LjU5LDM2OS4xNDNDMjMyLjk4LDM3OS42MiwyMzUuMzk4LDM4OS4yNCwyMzYuNjA3LDM5NC4wNUwyMzcuODE1LDM5OC44NiIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1FIExFLUQiIGlkPSJMLUUtRC0xIiBkPSJNMzA4LjI1Nyw0MDRMMzMwLjU4MSwzOTguMzMzQzM1Mi45MDYsMzkyLjY2NywzOTcuNTU0LDM4MS4zMzMsNDAwLjc5OSwzNzAuMjQyQzQwNC4wNDQsMzU5LjE1LDM2NS44ODQsMzQ4LjMsMzQ2LjgwNSwzNDIuODc1TDMyNy43MjUsMzM3LjQ1Ii8+PHBhdGggbWFya2VyLWVuZD0idXJsKCNteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kKSIgc3R5bGU9ImZpbGw6bm9uZTsiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIExTLUQgTEUtQyIgaWQ9IkwtRC1DLTEiIGQ9Ik0zMzAuOTA3LDMwM0wzNTMuNjc5LDI5Ny4zMzNDMzc2LjQ1MiwyOTEuNjY3LDQyMS45OTcsMjgwLjMzMyw0MzcuMjIsMjY5LjQ5OUM0NTIuNDQyLDI1OC42NjQsNDM3LjM0MSwyNDguMzI5LDQyOS43OSwyNDMuMTYxTDQyMi4yNCwyMzcuOTkzIi8+PHBhdGggbWFya2VyLWVuZD0idXJsKCNteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kKSIgc3R5bGU9ImZpbGw6bm9uZTsiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIExTLUMgTEUtQiIgaWQ9IkwtQy1CLTEiIGQ9Ik00MzIuMzkxLDIxMS42NzFMNDczLjU2NywyMDQuMzkzQzUxNC43NDMsMTk3LjExNCw1OTcuMDk2LDE4Mi41NTcsNTk1LjMzNSwxNjguMTA4QzU5My41NzUsMTUzLjY1OCw1MDcuNywxMzkuMzE2LDQ2NC43NjMsMTMyLjE0NUw0MjEuODI1LDEyNC45NzQiLz48cGF0aCBtYXJrZXItZW5kPSJ1cmwoI215LXN2Z19mbG93Y2hhcnQtcG9pbnRFbmQpIiBzdHlsZT0iZmlsbDpub25lOyIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZmxvd2NoYXJ0LWxpbmsgTFMtQiBMRS1BIiBpZD0iTC1CLUEtMSIgZD0iTTQxNi41OTgsMTEwLjg5OEw0NjAuNCwxMDMuNTgyQzUwNC4yMDMsOTYuMjY2LDU5MS44MDksODEuNjMzLDU5MS4xMjIsNjYuNzRDNTkwLjQzNiw1MS44NDgsNTAxLjQ1NywzNi42OTUsNDU2Ljk2OCwyOS4xMTlMNDEyLjQ3OSwyMS41NDMiLz48cGF0aCBtYXJrZXItZW5kPSJ1cmwoI215LXN2Z19mbG93Y2hhcnQtcG9pbnRFbmQpIiBzdHlsZT0iZmlsbDpub25lOyIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZmxvd2NoYXJ0LWxpbmsgTFMtQSBMRS1CIiBpZD0iTC1BLUItMiIgZD0iTTM4MS4xMTYsMzNMMzgwLjUxNiwzOC42NjdDMzc5LjkxNiw0NC4zMzMsMzc4LjcxNiw1NS42NjcsMzc4LjA3NCw2Ni4xMTdDMzc3LjQzMiw3Ni41NjcsMzc3LjM0OCw4Ni4xMzMsMzc3LjMwNyw5MC45MTdMMzc3LjI2NSw5NS43Ii8+PHBhdGggbWFya2VyLWVuZD0idXJsKCNteS1zdmdfZmxvd2NoYXJ0LXBvaW50RW5kKSIgc3R5bGU9ImZpbGw6bm9uZTsiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIExTLUIgTEUtQyIgaWQ9IkwtQi1DLTIiIGQ9Ik0zODEuMjkxLDEzNEwzODIuNzM5LDEzOS42NjdDMzg0LjE4OCwxNDUuMzMzLDM4Ny4wODQsMTU2LjY2NywzODguODksMTY3LjExOUMzOTAuNjk2LDE3Ny41NzIsMzkxLjQxMiwxODcuMTQzLDM5MS43NywxOTEuOTI5TDM5Mi4xMjgsMTk2LjcxNSIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1DIExFLUYiIGlkPSJMLUMtRi0wIiBkPSJNNDMyLjM5MSwyMjcuNTQ4TDQ2MS44ODksMjM0LjQ1N0M0OTEuMzg3LDI0MS4zNjUsNTUwLjM4MywyNTUuMTgzLDU4My44NzEsMjY3LjA2OUM2MTcuMzU5LDI3OC45NTUsNjI1LjMzOCwyODguOTEsNjI5LjMyOCwyOTMuODg3TDYzMy4zMTgsMjk4Ljg2NSIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1GIExFLUMiIGlkPSJMLUYtQy0wIiBkPSJNNjc1LjEyOSwzMDNMNjgzLjgwNywyOTcuMzMzQzY5Mi40ODYsMjkxLjY2Nyw3MDkuODQyLDI4MC4zMzMsNjcwLjI1OSwyNjcuMzU3QzYzMC42NzYsMjU0LjM4Miw1MzQuMTU0LDIzOS43NjMsNDg1Ljg5MiwyMzIuNDU0TDQzNy42MzEsMjI1LjE0NSIvPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbXktc3ZnX2Zsb3djaGFydC1wb2ludEVuZCkiIHN0eWxlPSJmaWxsOm5vbmU7IiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayBMUy1DIExFLUQiIGlkPSJMLUMtRC0yIiBkPSJNMzU3LjU3OSwyMzVMMzQ1LjE1MywyNDAuNjY3QzMzMi43MjgsMjQ2LjMzMywzMDcuODc4LDI1Ny42NjcsMjkzLjY4NywyNjguMTdDMjc5LjQ5NywyNzguNjc0LDI3NS45NjcsMjg4LjM0NywyNzQuMjAxLDI5My4xODRMMjcyLjQzNiwyOTguMDIxIi8+PC9nPjxnIGNsYXNzPSJlZGdlTGFiZWxzIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NC4wMzkwNjI1LCA2NykiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NC4wMzkwNjI1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEyOC4wNzgxMjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5VcGxvYWQgRG9jdW1lbnQ8L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTA1Ljg1NTQ2ODc1LCAxMTcuNSkiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01NC4yNTc4MTI1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEwOC41MTU2MjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5HZW5lcmF0ZSBIYXNoPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjAyNzM0Mzc1LCAxNjgpIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzkuNTg1OTM3NSwgLTkpIiBjbGFzcz0ibGFiZWwiPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTgiIHdpZHRoPSI3OS4xNzE4NzUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5TZW5kIEhhc2g8L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOTcuMTc1NzgxMjUsIDI2OSkiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02Ny4xNDg0Mzc1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEzNC4yOTY4NzUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5Jbml0aWF0ZSBUcmFuc2FjdGlvbjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNDkuNjQwNjI1LCAzNzApIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzguMjQyMTg3NSwgLTkpIiBjbGFzcz0ibGFiZWwiPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTgiIHdpZHRoPSI3Ni40ODQzNzUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5TdG9yZSBEYXRhPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMxOC41OTM3NSwgMzcwKSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ1LjM1MTU2MjUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iOTAuNzAzMTI1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+Q29uZmlybWF0aW9uPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2MC44MzIwMzEyNSwgMjY5KSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIyLjY3OTY4NzUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iNDUuMzU5Mzc1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+UmVzdWx0PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUzMS4zNzg5MDYyNSwgMTY4KSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTY0LjAzMTI1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEyOC4wNjI1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+Tm90YXJpemF0aW9uIFByb29mPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU0MC42OTUzMTI1LCA2NykiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01MS4xMzI4MTI1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEwMi4yNjU2MjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5EaXNwbGF5IFJlc3VsdDwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDYuNzczNDM3NSwgNjcpIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTguNjk1MzEyNSwgLTkpIiBjbGFzcz0ibGFiZWwiPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTgiIHdpZHRoPSIxMTcuMzkwNjI1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+VmVyaWZ5IERvY3VtZW50PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIyMC4xMTMyODEyNSwgMTY4KSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTkyLjUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iMTg1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+U2VuZCBIYXNoIGZvciBWZXJpZmljYXRpb248L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjA2LjExMzI4MTI1LCAyNjkpIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjEuNzg5MDYyNSwgLTkpIiBjbGFzcz0ibGFiZWwiPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTgiIHdpZHRoPSI0My41NzgxMjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5RdWVyeTwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMzAuNTYyNSwgMzcwKSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIyLjY3OTY4NzUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iNDUuMzU5Mzc1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+Q2hlY2s8L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDQyLjIwMzEyNSwgMzcwKSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTU4LjI1NzgxMjUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iMTE2LjUxNTYyNSI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyB3aGl0ZS1zcGFjZTogbm93cmFwOyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiPjxzcGFuIGNsYXNzPSJlZGdlTGFiZWwiPlZlcmlmaWNhdGlvbiBEYXRhPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ2Ny41NDI5Njg3NSwgMjY5KSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTY0LjAzMTI1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEyOC4wNjI1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+VmVyaWZpY2F0aW9uIFJlc3VsdDwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NzkuNDQ5MjE4NzUsIDE2OCkiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NC4wMzkwNjI1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEyOC4wNzgxMjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5WZXJpZmljYXRpb24gU3RhdHVzPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY3OS40MTQwNjI1LCA2NykiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02Ny41ODU5Mzc1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEzNS4xNzE4NzUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5EaXNwbGF5IFZlcmlmaWNhdGlvbjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNzcuNTE1NjI1LCA2NykiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05Mi4wNDY4NzUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iMTg0LjA5Mzc1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+T3B0aW9uYWw6IFN0b3JlIERvY3VtZW50PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4OS45ODA0Njg3NSwgMTY4KSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTU3LjM2NzE4NzUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iMTE0LjczNDM3NSI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyB3aGl0ZS1zcGFjZTogbm93cmFwOyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiPjxzcGFuIGNsYXNzPSJlZGdlTGFiZWwiPlNlbmQgRG9jdW1lbnQ8L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjA5LjM3ODkwNjI1LCAyNjkpIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTcuODA0Njg3NSwgLTkpIiBjbGFzcz0ibGFiZWwiPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTgiIHdpZHRoPSIxMTUuNjA5Mzc1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+U3RvcmUgRG9jdW1lbnQ8L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzI3LjE5OTIxODc1LCAyNjkpIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDAuMDE1NjI1LCAtOSkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjgwLjAzMTI1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+UmV0dXJuIENJRDwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyODMuMDI3MzQzNzUsIDI2OSkiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zNS4xMjUsIC05KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iNzAuMjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj5TdG9yZSBDSUQ8L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PC9nPjxnIGNsYXNzPSJub2RlcyI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzgyLjg2MzI4MTI1LCAxNi41KSIgZGF0YS1pZD0iQSIgZGF0YS1ub2RlPSJ0cnVlIiBpZD0iZmxvd2NoYXJ0LUEtMCIgY2xhc3M9Im5vZGUgZGVmYXVsdCBkZWZhdWx0IGZsb3djaGFydC1sYWJlbCI+PHJlY3QgaGVpZ2h0PSIzMyIgd2lkdGg9IjQ4Ljc4MTI1IiB5PSItMTYuNSIgeD0iLTI0LjM5MDYyNSIgcnk9IjAiIHJ4PSIwIiBzdHlsZT0iIiBjbGFzcz0iYmFzaWMgbGFiZWwtY29udGFpbmVyIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2Ljg5MDYyNSwgLTkpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0Lz48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iMzMuNzgxMjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0ibm9kZUxhYmVsIj5Vc2VyPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM3Ny4wNzQyMTg3NSwgMTE3LjUpIiBkYXRhLWlkPSJCIiBkYXRhLW5vZGU9InRydWUiIGlkPSJmbG93Y2hhcnQtQi0xIiBjbGFzcz0ibm9kZSBkZWZhdWx0IGRlZmF1bHQgZmxvd2NoYXJ0LWxhYmVsIj48cmVjdCBoZWlnaHQ9IjMzIiB3aWR0aD0iNzkuMDQ2ODc1IiB5PSItMTYuNSIgeD0iLTM5LjUyMzQzNzUiIHJ5PSI1IiByeD0iNSIgc3R5bGU9IiIgY2xhc3M9ImJhc2ljIGxhYmVsLWNvbnRhaW5lciIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMi4wMjM0Mzc1LCAtOSkiIHN0eWxlPSIiIGNsYXNzPSJsYWJlbCI+PHJlY3QvPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTgiIHdpZHRoPSI2NC4wNDY4NzUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0ibm9kZUxhYmVsIj5Gcm9udGVuZDwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzOTMuNzU3ODEyNSwgMjE4LjUpIiBkYXRhLWlkPSJDIiBkYXRhLW5vZGU9InRydWUiIGlkPSJmbG93Y2hhcnQtQy01IiBjbGFzcz0ibm9kZSBkZWZhdWx0IGRlZmF1bHQgZmxvd2NoYXJ0LWxhYmVsIj48cmVjdCBoZWlnaHQ9IjMzIiB3aWR0aD0iNzcuMjY1NjI1IiB5PSItMTYuNSIgeD0iLTM4LjYzMjgxMjUiIHJ5PSI1IiByeD0iNSIgc3R5bGU9IiIgY2xhc3M9ImJhc2ljIGxhYmVsLWNvbnRhaW5lciIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMS4xMzI4MTI1LCAtOSkiIHN0eWxlPSIiIGNsYXNzPSJsYWJlbCI+PHJlY3QvPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTgiIHdpZHRoPSI2Mi4yNjU2MjUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0ibm9kZUxhYmVsIj5CYWNrZW5kPC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI2NC41OTc2NTYyNSwgMzE5LjUpIiBkYXRhLWlkPSJEIiBkYXRhLW5vZGU9InRydWUiIGlkPSJmbG93Y2hhcnQtRC03IiBjbGFzcz0ibm9kZSBkZWZhdWx0IGRlZmF1bHQgZmxvd2NoYXJ0LWxhYmVsIj48cmVjdCBoZWlnaHQ9IjMzIiB3aWR0aD0iMTg3LjUzMTI1IiB5PSItMTYuNSIgeD0iLTkzLjc2NTYyNSIgcnk9IjUiIHJ4PSI1IiBzdHlsZT0iIiBjbGFzcz0iYmFzaWMgbGFiZWwtY29udGFpbmVyIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTg2LjI2NTYyNSwgLTkpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0Lz48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iMTcyLjUzMTI1Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdoaXRlLXNwYWNlOiBub3dyYXA7IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+U29yb2JhbiBTbWFydCBDb250cmFjdDwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNDMuMjUzOTA2MjUsIDQyMC41KSIgZGF0YS1pZD0iRSIgZGF0YS1ub2RlPSJ0cnVlIiBpZD0iZmxvd2NoYXJ0LUUtOSIgY2xhc3M9Im5vZGUgZGVmYXVsdCBkZWZhdWx0IGZsb3djaGFydC1sYWJlbCI+PHJlY3QgaGVpZ2h0PSIzMyIgd2lkdGg9IjE0Mi4xNzE4NzUiIHk9Ii0xNi41IiB4PSItNzEuMDg1OTM3NSIgcnk9IjUiIHJ4PSI1IiBzdHlsZT0iIiBjbGFzcz0iYmFzaWMgbGFiZWwtY29udGFpbmVyIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYzLjU4NTkzNzUsIC05KSIgc3R5bGU9IiIgY2xhc3M9ImxhYmVsIj48cmVjdC8+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxOCIgd2lkdGg9IjEyNy4xNzE4NzUiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgd2hpdGUtc3BhY2U6IG5vd3JhcDsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj48c3BhbiBjbGFzcz0ibm9kZUxhYmVsIj5TdGVsbGFyIEJsb2NrY2hhaW48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjQ5Ljg1OTM3NSwgMzE5LjUpIiBkYXRhLWlkPSJGIiBkYXRhLW5vZGU9InRydWUiIGlkPSJmbG93Y2hhcnQtRi0zOSIgY2xhc3M9Im5vZGUgZGVmYXVsdCBkZWZhdWx0IGZsb3djaGFydC1sYWJlbCI+PHJlY3QgaGVpZ2h0PSIzMyIgd2lkdGg9IjUwLjU2MjUiIHk9Ii0xNi41IiB4PSItMjUuMjgxMjUiIHJ5PSIwIiByeD0iMCIgc3R5bGU9IiIgY2xhc3M9ImJhc2ljIGxhYmVsLWNvbnRhaW5lciIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNy43ODEyNSwgLTkpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0Lz48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjE4IiB3aWR0aD0iMzUuNTYyNSI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyB3aGl0ZS1zcGFjZTogbm93cmFwOyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiPjxzcGFuIGNsYXNzPSJub2RlTGFiZWwiPklQRlM8L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+"
-alt="" /></p>
-<h2 id="security-considerations">6. Security Considerations</h2>
+<h4 id="storage-layer">2.5 Storage Layer</h4>
+<ul>
+<li>Document metadata in PostgreSQL</li>
+<li>Encrypted documents in S3-compatible storage</li>
+<li>Redis cache for frequent queries</li>
+<li>Stellar transaction history</li>
+</ul>
+<h3 id="stellar-specific-components">3. Stellar-Specific Components</h3>
+<h4 id="account-structure">3.1 Account Structure</h4>
+<pre class="plaintext"><code>ROOT_ACCOUNT
+├── NOTARY_POOL_ACCOUNT
+│   ├── DOCUMENT_ACCOUNT_1
+│   ├── DOCUMENT_ACCOUNT_2
+│   └── DOCUMENT_ACCOUNT_N
+└── FEE_POOL_ACCOUNT</code></pre>
+<h4 id="transaction-flow">3.2 Transaction Flow</h4>
 <ol type="1">
-<li><strong>Data Encryption</strong>: All communications between
-components will use HTTPS/TLS encryption.</li>
-<li><strong>Authentication</strong>: JWT-based authentication for user
-sessions.</li>
-<li><strong>Smart Contract Security</strong>: Rigorous testing and
-auditing of the Soroban smart contract.</li>
-<li><strong>Private Key Management</strong>: Secure storage and handling
-of Stellar account private keys.</li>
-<li><strong>Rate Limiting</strong>: Implement API rate limiting to
-prevent abuse.</li>
+<li><p>Document Upload</p>
+<pre class="mermaid"><code>sequenceDiagram
+  User-&gt;&gt;API: Upload Document
+  API-&gt;&gt;DocService: Process Document
+  DocService-&gt;&gt;StellarService: Generate Hash
+  StellarService-&gt;&gt;Stellar: Create Transaction
+  Stellar--&gt;&gt;User: Confirmation</code></pre></li>
+<li><p>Document Verification</p>
+<pre class="mermaid"><code>sequenceDiagram
+  Verifier-&gt;&gt;API: Submit Document
+  API-&gt;&gt;DocService: Generate Hash
+  DocService-&gt;&gt;StellarService: Query Hash
+  StellarService-&gt;&gt;Stellar: Verify Transaction
+  Stellar--&gt;&gt;Verifier: Verification Result</code></pre></li>
 </ol>
-<h2 id="scalability-considerations">7. Scalability Considerations</h2>
+<h4 id="stellar-network-usage">3.3 Stellar Network Usage</h4>
 <ol type="1">
-<li><strong>Horizontal Scaling</strong>: Design the backend to be
-stateless, allowing for easy horizontal scaling.</li>
-<li><strong>Caching</strong>: Implement caching mechanisms for
-frequently accessed data.</li>
-<li><strong>Database Indexing</strong>: Optimize database queries with
-proper indexing.</li>
-<li><strong>Load Balancing</strong>: Use load balancers to distribute
-traffic across multiple server instances.</li>
+<li><strong>Transaction Types</strong>
+<ul>
+<li>Document Registration: Custom transaction with document hash</li>
+<li>Verification Queries: Horizon API calls</li>
+<li>Smart Contract Operations: Custom operations</li>
+</ul></li>
+<li><strong>Performance Optimizations</strong>
+<ul>
+<li>Batch processing for multiple documents</li>
+<li>Channel accounts for high volume</li>
+<li>Transaction queue management</li>
+<li>Fee optimization strategies</li>
+</ul></li>
+<li><strong>Security Measures</strong>
+<ul>
+<li>Multi-signature requirements</li>
+<li>Threshold settings</li>
+<li>Account authorization levels</li>
+<li>Key management system</li>
+</ul></li>
 </ol>
-<h2 id="monitoring-and-logging">8. Monitoring and Logging</h2>
-<ol type="1">
-<li><strong>System Monitoring</strong>: Implement comprehensive
-monitoring for all system components.</li>
-<li><strong>Error Logging</strong>: Centralized error logging and
-alerting system.</li>
-<li><strong>Performance Metrics</strong>: Track and log key performance
-indicators.</li>
-<li><strong>Audit Trail</strong>: Maintain a detailed audit trail of all
-notarization and verification activities.</li>
-</ol>
-<h2 id="disaster-recovery-and-backup">9. Disaster Recovery and
-Backup</h2>
-<ol type="1">
-<li><strong>Regular Backups</strong>: Implement automated, regular
-backups of all critical data.</li>
-<li><strong>Failover Mechanisms</strong>: Design redundancy and failover
-mechanisms for critical components.</li>
-<li><strong>Data Replication</strong>: Use data replication techniques
-to ensure data integrity and availability.</li>
-</ol>
+<h3 id="scaling-considerations">4. Scaling Considerations</h3>
+<h4 id="horizontal-scaling">4.1 Horizontal Scaling</h4>
+<ul>
+<li>Microservices containerization (Kubernetes)</li>
+<li>Load balancing across regions</li>
+<li>Database sharding</li>
+<li>Cache distribution</li>
+</ul>
+<h4 id="stellar-network-scaling">4.2 Stellar Network Scaling</h4>
+<ul>
+<li>Channel accounts for throughput</li>
+<li>Batch processing optimization</li>
+<li>Transaction queue management</li>
+<li>Fee strategy optimization</li>
+</ul>
+<h3 id="security-architecture">5. Security Architecture</h3>
+<h4 id="document-security">5.1 Document Security</h4>
+<ul>
+<li>AES-256 encryption</li>
+<li>Zero-knowledge proofs</li>
+<li>Secure key management</li>
+<li>Access control lists</li>
+</ul>
+<h4 id="blockchain-security">5.2 Blockchain Security</h4>
+<ul>
+<li>Multi-signature transactions</li>
+<li>Hardware Security Module (HSM) integration</li>
+<li>Key rotation policies</li>
+<li>Transaction monitoring</li>
+</ul>
+<h3 id="integration-points">6. Integration Points</h3>
+<h4 id="external-systems">6.1 External Systems</h4>
+<ul>
+<li>Authentication providers</li>
+<li>Storage providers</li>
+<li>Payment processors</li>
+<li>Monitoring systems</li>
+</ul>
+<h4 id="apis">6.2 APIs</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> NotaryAPI {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Document Management</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">uploadDocument</span>(file<span class="op">:</span> <span class="bu">File</span><span class="op">,</span> metadata<span class="op">:</span> Metadata)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>UploadResult<span class="op">&gt;;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">verifyDocument</span>(hash<span class="op">:</span> <span class="dt">string</span>)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>VerificationResult<span class="op">&gt;;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stellar Operations</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">submitTransaction</span>(tx<span class="op">:</span> StellarTransaction)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>TransactionResult<span class="op">&gt;;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">queryTransaction</span>(hash<span class="op">:</span> <span class="dt">string</span>)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>TransactionStatus<span class="op">&gt;;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Account Management</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">createAccount</span>()<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>AccountDetails<span class="op">&gt;;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">manageKeys</span>(account<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> operation<span class="op">:</span> KeyOperation)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>KeyResult<span class="op">&gt;;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="monitoring-and-maintenance">7. Monitoring and Maintenance</h3>
+<h4 id="system-monitoring">7.1 System Monitoring</h4>
+<ul>
+<li>Performance metrics</li>
+<li>Error tracking</li>
+<li>Transaction monitoring</li>
+<li>Network status</li>
+<li>Resource utilization</li>
+</ul>
+<h4 id="maintenance-procedures">7.2 Maintenance Procedures</h4>
+<ul>
+<li>Backup strategies</li>
+<li>Recovery procedures</li>
+<li>Update processes</li>
+<li>Key rotation</li>
+<li>Network synchronization</li>
+</ul>
+<h3 id="development-and-deployment">8. Development and Deployment</h3>
+<h4 id="development-environment">8.1 Development Environment</h4>
+<ul>
+<li>Local Stellar test network</li>
+<li>Development tools</li>
+<li>Testing frameworks</li>
+<li>CI/CD pipeline</li>
+</ul>
+<h4 id="production-deployment">8.2 Production Deployment</h4>
+<ul>
+<li>Multi-region setup</li>
+<li>Failover procedures</li>
+<li>Backup systems</li>
+<li>Monitoring setup</li>
+</ul>
 </body>
 </html>
