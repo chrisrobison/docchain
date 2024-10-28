@@ -1,7 +1,8 @@
 #![no_std]
 use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, token, Address, BytesN, Env,
-    Symbol, Vec, Map, String, panic_with_error, log,
+    Symbol, Vec, vec, Map, String, panic_with_error, log, 
+    xdr::{ScErrorType, ScErrorCode}, // Add this line
 };
 
 /// Error codes for the contract
@@ -22,6 +23,53 @@ pub enum NotaryError {
     OperationFailed = 12,
 }
 
+impl From<soroban_sdk::Error> for NotaryError {
+    fn from(_error: soroban_sdk::Error) -> Self {
+        NotaryError::OperationFailed
+    }
+}
+
+impl From<NotaryError> for soroban_sdk::Error {
+    fn from(error: NotaryError) -> Self {
+        // Map your custom errors to Soroban error codes
+        let (type_, code) = match error {
+            NotaryError::AlreadyExists => (ScErrorType::Contract, ScErrorCode::ExistingValue),
+            NotaryError::NotFound => (ScErrorType::Contract, ScErrorCode::MissingValue),
+            NotaryError::Unauthorized => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidVersion => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidStatus => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidSignature => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::ExpiredClaim => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::MissingIdentityClaim => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidAuthority => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidInput => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidState => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::OperationFailed => (ScErrorType::Contract, ScErrorCode::InternalError),
+        };
+
+        soroban_sdk::Error::from_type_and_code(type_, code)
+    }
+}
+impl From<&NotaryError> for soroban_sdk::Error {
+    fn from(error: &NotaryError) -> Self {
+        let (type_, code) = match error {
+            NotaryError::AlreadyExists => (ScErrorType::Contract, ScErrorCode::ExistingValue),
+            NotaryError::NotFound => (ScErrorType::Contract, ScErrorCode::MissingValue),
+            NotaryError::Unauthorized => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidVersion => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidStatus => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidSignature => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::ExpiredClaim => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::MissingIdentityClaim => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidAuthority => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidInput => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::InvalidState => (ScErrorType::Contract, ScErrorCode::InternalError),
+            NotaryError::OperationFailed => (ScErrorType::Contract, ScErrorCode::InternalError),
+        };
+        
+        soroban_sdk::Error::from_type_and_code(type_, code)
+    }
+}
 /// Storage identifiers
 const ADMIN: Symbol = symbol_short!("ADMIN");
 const STATE: Symbol = symbol_short!("STATE");
@@ -133,7 +181,7 @@ pub struct NotaryContract;
 impl NotaryContract {
     /// Initialize the contract
     pub fn initialize(env: Env, admin: Address) -> Result<(), NotaryError> {
-        if env.storage().has(&ADMIN) {
+        if env.storage().instance().has(&ADMIN) {
             return Err(NotaryError::AlreadyExists);
         }
 
@@ -146,117 +194,124 @@ impl NotaryContract {
             settings: Map::new(&env),
         };
 
-        env.storage().set(&STATE, &state);
-        env.storage().set(&ADMIN, &admin);
+        env.storage().instance().set(&STATE, &state);
+        env.storage().instance().set(&ADMIN, &admin);
 
         Ok(())
     }
 
     /// Create a new document
     pub fn create_document(
-        env: Env,
-        hash: BytesN<32>,
-        title: String,
-        signers: Vec<Address>,
-        metadata: Map<Symbol, String>,
-    ) -> Result<(), NotaryError> {
-        let mut state: NotaryState = env.storage().get(&STATE).unwrap();
+    env: Env,
+    hash: BytesN<32>,
+    title: String,
+    signers: Vec<Address>,
+    metadata: Map<Symbol, String>,
+) -> Result<(), NotaryError> {
+    let mut state: NotaryState = env.storage().instance().get(&STATE).unwrap();
 
-        // Check if document already exists
-        if state.documents.contains_key(&hash) {
-            return Err(NotaryError::AlreadyExists);
-        }
+    // Clone hash upfront since we'll need it multiple times
+    let hash_clone = hash.clone();
 
-        // Create initial version
-        let version = DocumentVersion {
-            hash: hash.clone(),
-            parent_hash: None,
-            title: title.clone(),
-            status: VersionStatus::PendingApproval,
-            creator: env.invoker(),
-            created_at: env.ledger().timestamp(),
-            updated_at: env.ledger().timestamp(),
-            signatures: Vec::new(&env),
-            required_signers: signers.clone(),
-            metadata: metadata.clone(),
-        };
-
-        // Create document
-        let document = Document {
-            hash: hash.clone(),
-            status: DocumentStatus::Pending,
-            owner: env.invoker(),
-            created_at: env.ledger().timestamp(),
-            updated_at: env.ledger().timestamp(),
-            current_version: 0,
-            versions: vec![&env, version],
-            authorized_signers: signers,
-            metadata,
-        };
-
-        // Update state
-        state.documents.set(&hash, &document);
-
-        // Update user documents
-        let mut user_docs = state.user_documents.get(&env.invoker())
-            .unwrap_or(Vec::new(&env));
-        user_docs.push_back(hash.clone());
-        state.user_documents.set(&env.invoker(), &user_docs);
-
-        // Save state and emit event
-        env.storage().set(&STATE, &state);
-        env.events().publish((&DOCS, NotaryEvent::DocumentCreated(hash)));
-
-        Ok(())
+    // Check if document already exists
+    if state.documents.contains_key(hash_clone.clone()) {
+        return Err(NotaryError::AlreadyExists);
     }
+
+    // Create initial version
+    let version = DocumentVersion {
+        hash: hash_clone.clone(),
+        parent_hash: None,
+        title: title.clone(),
+        status: VersionStatus::PendingApproval,
+        creator: env.current_contract_address(),
+        created_at: env.ledger().timestamp(),
+        updated_at: env.ledger().timestamp(),
+        signatures: Vec::new(&env),
+        required_signers: signers.clone(),
+        metadata: metadata.clone(),
+    };
+
+    // Create document
+    let document = Document {
+        hash: hash_clone.clone(),
+        status: DocumentStatus::Pending,
+        owner: env.current_contract_address(),
+        created_at: env.ledger().timestamp(),
+        updated_at: env.ledger().timestamp(),
+        current_version: 0,
+        versions: vec![&env, version],
+        authorized_signers: signers,
+        metadata,
+    };
+
+    // Update state
+    state.documents.set(hash, document);
+
+    // Update user documents
+    let mut user_docs = state.user_documents.get(env.current_contract_address())
+        .unwrap_or(Vec::new(&env));
+    user_docs.push_back(hash_clone.clone());
+    state.user_documents.set(env.current_contract_address(), user_docs);
+
+    // Save state and emit event
+    env.storage().instance().set(&STATE, &state);
+    env.events().publish((DOCS,), NotaryEvent::DocumentCreated(hash_clone));
+
+    Ok(())
+}
 
     /// Add new version to document
-    pub fn add_version(
-        env: Env,
-        document_hash: BytesN<32>,
-        version_hash: BytesN<32>,
-        title: String,
-        metadata: Map<Symbol, String>,
-    ) -> Result<(), NotaryError> {
-        let mut state: NotaryState = env.storage().get(&STATE).unwrap();
+pub fn add_version(
+    env: Env,
+    document_hash: BytesN<32>,
+    version_hash: BytesN<32>,
+    title: String,
+    metadata: Map<Symbol, String>,
+) -> Result<(), NotaryError> {
+    let mut state: NotaryState = env.storage().instance().get(&STATE).unwrap();
 
-        // Get existing document
-        let mut document = state.documents.get(&document_hash)
-            .ok_or(NotaryError::NotFound)?;
+    // Clone both hashes upfront since we'll need them multiple times
+    let doc_hash_clone = document_hash.clone();
+    let ver_hash_clone = version_hash.clone();
 
-        // Verify caller is owner or authorized signer
-        if !Self::is_authorized(&document, &env.invoker()) {
-            return Err(NotaryError::Unauthorized);
-        }
+    // Get existing document, using clone for get operation
+    let mut document = state.documents.get(document_hash)
+        .ok_or(NotaryError::NotFound)?;
 
-        // Create new version
-        let version = DocumentVersion {
-            hash: version_hash.clone(),
-            parent_hash: Some(document_hash.clone()),
-            title,
-            status: VersionStatus::Draft,
-            creator: env.invoker(),
-            created_at: env.ledger().timestamp(),
-            updated_at: env.ledger().timestamp(),
-            signatures: Vec::new(&env),
-            required_signers: document.authorized_signers.clone(),
-            metadata,
-        };
-
-        // Add version and update document
-        document.versions.push_back(version);
-        document.current_version = document.versions.len() as u32 - 1;
-        document.updated_at = env.ledger().timestamp();
-
-        // Update state
-        state.documents.set(&document_hash, &document);
-        env.storage().set(&STATE, &state);
-
-        // Emit event
-        env.events().publish((&DOCS, NotaryEvent::VersionAdded(version_hash)));
-
-        Ok(())
+    // Verify caller is owner or authorized signer
+    if !Self::is_authorized(&document, env.current_contract_address()) {
+        return Err(NotaryError::Unauthorized);
     }
+
+    // Create new version
+    let version = DocumentVersion {
+        hash: ver_hash_clone.clone(),
+        parent_hash: Some(doc_hash_clone.clone()),
+        title,
+        status: VersionStatus::Draft,
+        creator: env.current_contract_address(),
+        created_at: env.ledger().timestamp(),
+        updated_at: env.ledger().timestamp(),
+        signatures: Vec::new(&env),
+        required_signers: document.authorized_signers.clone(),
+        metadata,
+    };
+
+    // Add version and update document
+    document.versions.push_back(version);
+    document.current_version = (document.versions.len() - 1) as u32;
+    document.updated_at = env.ledger().timestamp();
+
+    // Update state with original document_hash
+    state.documents.set(doc_hash_clone, document);
+    env.storage().instance().set(&STATE, &state);
+
+    // Emit event using cloned version hash
+    env.events().publish((DOCS,), NotaryEvent::VersionAdded(ver_hash_clone));
+
+    Ok(())
+}
 
     /// Sign a document version
     pub fn sign_document(
@@ -264,28 +319,28 @@ impl NotaryContract {
         document_hash: BytesN<32>,
         signature: Signature,
     ) -> Result<(), NotaryError> {
-        let mut state: NotaryState = env.storage().get(&STATE).unwrap();
+        let mut state: NotaryState = env.storage().instance().get(&STATE).unwrap();
 
         // Get document
-        let mut document = state.documents.get(&document_hash)
+        let mut document = state.documents.get(document_hash.clone())
             .ok_or(NotaryError::NotFound)?;
 
         // Verify signer is authorized
-        if !document.authorized_signers.contains(&env.invoker()) {
+        if !document.authorized_signers.contains(&env.current_contract_address()) {
             return Err(NotaryError::Unauthorized);
         }
 
         // Get current version
         let current_version_idx = document.current_version as usize;
-        let mut current_version = document.versions.get(current_version_idx).unwrap();
-
+        let mut current_version = document.versions.get(current_version_idx as u32).unwrap();
+        
         // Verify not already signed by this signer
         if current_version.signatures.iter().any(|s| s.signer == signature.signer) {
             return Err(NotaryError::AlreadyExists);
         }
 
         // Add signature
-        current_version.signatures.push_back(signature);
+        current_version.signatures.push_back(signature.clone());
         current_version.updated_at = env.ledger().timestamp();
 
         // Check if all required signatures are present
@@ -295,25 +350,25 @@ impl NotaryContract {
         }
 
         // Update document
-        document.versions.set(current_version_idx, &current_version);
+        document.versions.set(current_version_idx as u32, current_version);
         document.updated_at = env.ledger().timestamp();
 
         // Update state
-        state.documents.set(&document_hash, &document);
-        env.storage().set(&STATE, &state);
+        state.documents.set(document_hash.clone(), document);
+        env.storage().instance().set(&STATE, &state);
 
         // Emit event
-        env.events().publish((&DOCS, NotaryEvent::DocumentSigned(document_hash)));
+        env.events().publish((DOCS,), NotaryEvent::DocumentSigned(document_hash));
 
         Ok(())
     }
 
     /// Register a certification authority
     pub fn register_authority(env: Env, authority: Address) -> Result<(), NotaryError> {
-        let mut state: NotaryState = env.storage().get(&STATE).unwrap();
+        let mut state: NotaryState = env.storage().instance().get(&STATE).unwrap();
 
         // Verify caller is admin
-        if env.invoker() != state.admin {
+        if env.current_contract_address() != state.admin {
             return Err(NotaryError::Unauthorized);
         }
 
@@ -322,8 +377,8 @@ impl NotaryContract {
             state.authorities.push_back(authority.clone());
             
             // Update state and emit event
-            env.storage().set(&STATE, &state);
-            env.events().publish((&AUTH, NotaryEvent::AuthorityAdded(authority)));
+            env.storage().instance().set(&STATE, &state);
+            env.events().publish((AUTH,), NotaryEvent::AuthorityAdded(authority));
         }
 
         Ok(())
@@ -335,10 +390,10 @@ impl NotaryContract {
         user: Address,
         claim: IdentityClaim,
     ) -> Result<(), NotaryError> {
-        let mut state: NotaryState = env.storage().get(&STATE).unwrap();
+        let mut state: NotaryState = env.storage().instance().get(&STATE).unwrap();
 
         // Verify caller is authorized authority
-        if !state.authorities.contains(&env.invoker()) {
+        if !state.authorities.contains(&env.current_contract_address()) {
             return Err(NotaryError::InvalidAuthority);
         }
 
@@ -348,37 +403,37 @@ impl NotaryContract {
         }
 
         // Add claim to user's claims
-        let mut user_claims = state.claims.get(&user)
+        let mut user_claims = state.claims.get(user.clone())
             .unwrap_or(Vec::new(&env));
-        user_claims.push_back(claim);
-        state.claims.set(&user, &user_claims);
+        user_claims.push_back(claim.clone());
+        state.claims.set(user.clone(), user_claims);
 
         // Update state and emit event
-        env.storage().set(&STATE, &state);
-        env.events().publish((&AUTH, NotaryEvent::ClaimAdded(user)));
+        env.storage().instance().set(&STATE, &state);
+        env.events().publish((AUTH,), NotaryEvent::ClaimAdded(user));
 
         Ok(())
     }
 
     /// Verify document
     pub fn verify_document(env: Env, document_hash: BytesN<32>) -> Result<Document, NotaryError> {
-        let state: NotaryState = env.storage().get(&STATE).unwrap();
+        let state: NotaryState = env.storage().instance().get(&STATE).unwrap();
         
-        state.documents.get(&document_hash)
+        state.documents.get(document_hash)
             .ok_or(NotaryError::NotFound)
     }
 
     /// Helper: Check if address is authorized for document
-    fn is_authorized(document: &Document, address: &Address) -> bool {
-        address == &document.owner || document.authorized_signers.contains(address)
+    fn is_authorized(document: &Document, address: Address) -> bool {
+        address == document.owner || document.authorized_signers.contains(address)
     }
 
     /// Get user's documents
     pub fn get_user_documents(env: Env, user: Address) -> Result<Vec<BytesN<32>>, NotaryError> {
-        let state: NotaryState = env.storage().get(&STATE).unwrap();
+        let state: NotaryState = env.storage().instance().get(&STATE).unwrap();
         
-        Ok(state.user_documents.get(&user)
-            .unwrap_or(Vec::new(&env)))
+        Ok(state.user_documents.get(user)
+            .unwrap_or(Vec::new(&env)).clone())
     }
 
     /// Update document status
@@ -387,36 +442,36 @@ impl NotaryContract {
         document_hash: BytesN<32>,
         new_status: DocumentStatus,
     ) -> Result<(), NotaryError> {
-        let mut state: NotaryState = env.storage().get(&STATE).unwrap();
+        let mut state: NotaryState = env.storage().instance().get(&STATE).unwrap();
 
         // Get document
-        let mut document = state.documents.get(&document_hash)
+        let mut document = state.documents.get(document_hash.clone())
             .ok_or(NotaryError::NotFound)?;
 
         // Verify caller is owner
-        if env.invoker() != document.owner {
+        if env.current_contract_address() != document.owner {
             return Err(NotaryError::Unauthorized);
         }
 
         // Update status
-        document.status = new_status;
+        document.status = new_status.clone();
         document.updated_at = env.ledger().timestamp();
 
         // Update state
-        state.documents.set(&document_hash, &document);
-        env.storage().set(&STATE, &state);
+        state.documents.set(document_hash.clone(), document);
+        env.storage().instance().set(&STATE, &state);
 
         // Emit event
-        env.events().publish((&DOCS, NotaryEvent::StatusChanged(document_hash, new_status)));
+        env.events().publish((DOCS,), NotaryEvent::StatusChanged(document_hash, new_status));
 
         Ok(())
     }
 
     /// Get contract configuration
     pub fn get_config(env: Env, key: Symbol) -> Result<String, NotaryError> {
-        let state: NotaryState = env.storage().get(&STATE).unwrap();
+        let state: NotaryState = env.storage().instance().get(&STATE).unwrap();
         
-        state.settings.get(&key)
+        state.settings.get(key)
             .ok_or(NotaryError::NotFound)
     }
 
@@ -426,26 +481,28 @@ impl NotaryContract {
         key: Symbol,
         value: String,
     ) -> Result<(), NotaryError> {
-        let mut state: NotaryState = env.storage().get(&STATE).unwrap();
+        let mut state: NotaryState = env.storage().instance().get(&STATE).unwrap();
 
         // Verify caller is admin
-        if env.invoker() != state.admin {
+        if env.current_contract_address() != state.admin {
             return Err(NotaryError::Unauthorized);
         }
 
         // Update setting
-        state.settings.set(&key, &value);
-        env.storage().set(&STATE, &state);
+        state.settings.set(key, value);
+        env.storage().instance().set(&STATE, &state);
 
         Ok(())
     }
 }
 
-/// Tests module
 #[cfg(test)]
 mod test {
     use super::*;
-    use soroban_sdk::{testutils::{Address as _, AuthorizedFunction}, vec, map};
+    use soroban_sdk::{
+        testutils::{Address as _, AuthorizedFunction},
+        vec, map, Vec,
+    };
 
     #[test]
     fn test_initialize() {
@@ -456,8 +513,7 @@ mod test {
         let admin = Address::random(&env);
         assert!(client.initialize(&admin).is_ok());
     }
-
-    #[test]
+#[test]
     fn test_document_lifecycle() {
         let env = Env::default();
         let contract_id = env.register_contract(None, NotaryContract);
@@ -469,8 +525,6 @@ mod test {
 
         // Create document
         let hash = BytesN::random(&env);
-        let title = String
-// Test continuation...
         let title = String::from_slice(&env, "Test Document");
         let signers = vec![&env, Address::random(&env)];
         let metadata = Map::new(&env);
@@ -509,6 +563,7 @@ mod test {
 
         // Register authority
         let authority = Address::random(&env);
+        env.set_source_account(&admin);
         assert!(client.register_authority(&authority).is_ok());
 
         // Add claim
@@ -566,6 +621,7 @@ mod test {
         // Update config
         let key = symbol_short!("MAX_SIGNERS");
         let value = String::from_slice(&env, "10");
+        env.set_source_account(&admin);
         assert!(client.update_config(&key, &value).is_ok());
 
         // Verify config
@@ -647,6 +703,7 @@ mod test {
 
         // Register authority
         let authority = Address::random(&env);
+        env.set_source_account(&admin);
         client.register_authority(&authority).unwrap();
 
         // Add expired claim
