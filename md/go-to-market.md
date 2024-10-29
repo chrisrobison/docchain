@@ -1,4 +1,4 @@
-# BlockNotary Go-to-Market Strategy
+# DocChain Go-to-Market Strategy
 
 ## Phase 1: Initial Market Entry (Months 1-3)
 

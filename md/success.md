@@ -26,7 +26,7 @@
 **Legal Sector Transformation**
 The platform's adoption by law firms creates ripple effects across the legal industry:
 
-* 50+ law firms using BlockNotary report 75% reduction in document processing time
+* 50+ law firms using DocChain report 75% reduction in document processing time
 * Allows lawyers to focus on high-value tasks instead of administrative work
 * Makes legal services more affordable for clients through reduced overhead
 * Enables smaller law firms to compete more effectively with larger practices
@@ -141,7 +141,7 @@ Impact on musicians, artists, and content creators:
 
 ### Conclusion
 
-Success for BlockNotary extends far beyond traditional metrics. While user numbers and revenue are important indicators, our true impact lies in:
+Success for DocChain extends far beyond traditional metrics. While user numbers and revenue are important indicators, our true impact lies in:
 
 * Democratizing access to vital legal services
 * Reducing environmental impact of paper-based processes
