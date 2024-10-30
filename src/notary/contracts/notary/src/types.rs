@@ -152,6 +152,12 @@ pub enum NotaryEvent {
 
 impl From<&NotaryError> for soroban_sdk::Error {
     fn from(error: &NotaryError) -> Self {
-        (*error).into()
+        match error {
+            NotaryError::AlreadyExists => soroban_sdk::Error::from_type_and_code(ScErrorType::Contract, ScErrorCode::ExistingValue),
+            NotaryError::NotFound => soroban_sdk::Error::from_type_and_code(ScErrorType::Contract, ScErrorCode::MissingValue),
+            NotaryError::Unauthorized => soroban_sdk::Error::from_type_and_code(ScErrorType::Contract, ScErrorCode::InternalError),
+            _ => soroban_sdk::Error::from_type_and_code(ScErrorType::Contract, ScErrorCode::InternalError),
+        }
     }
 }
+
