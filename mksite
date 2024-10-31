@@ -1,0 +1,74 @@
+#!/usr/local/bin/php
+<?php
+
+$tree = json_decode(file_get_contents("site.json"));
+
+$itemtpl = <<<EOT
+    <li class="nav-item"> 
+        <a href="%%html%%" %%target%% class="nav-link"> 
+        <i class="fa-solid %%icon%%"></i>
+        <p>%%title%%</p>
+    </a> 
+    %%children%%
+</li>
+EOT;
+
+$out = '<ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">';
+
+foreach ($tree->pages as $obj) {
+    if (isset($obj->_children)) {
+        $obj->children = maketree($obj->_children);
+    }
+    if (isset($obj->target)) {
+        $obj->target = " target=\"{$obj->target}\" ";
+    }
+    $out .= preg_replace_callback("/\%\%(\w+)\%\%/", function($m) {
+        global $obj;
+        if (isset($obj->{$m[1]})) {
+            return $obj->{$m[1]};
+        } else {
+            return "";
+        }
+    }, $itemtpl);
+    if (file_exists($obj->markdown)) {
+        print "Converting {$obj->markdown} to {$obj->html}\n";
+        $html = `pandoc --css lib/pandoc.css --highlight-style breezedark -f markdown -t html5 --standalone --metadata title="{$obj->title}" --self-contained "{$obj->markdown}" > {$obj->html}`;
+    }
+}
+$out .= "</ul>";
+
+$html = file_get_contents("index.template.html");
+$html = preg_replace("/\%\%NAV_MARKUP\%\%/", $out, $html);
+file_put_contents("index.new.html", $html);
+$obj2 = new stdClass();
+
+function maketree($items) {
+    global $itemtpl;
+    global $obj2;
+
+    $out = '<ul class="nav nav-treeview">';
+    foreach ($items as $obj2) {
+        if (isset($obj2->_children)) {
+            $obj2->children = makeTree($obj2->_children);
+        }
+        if (isset($obj2->target)) {
+            $obj2->target = " target=\"{$obj2->target}\" ";
+        }
+        $out .= preg_replace_callback("/\%\%(\w+)\%\%/", function($m) {
+            global $obj2;
+            if (isset($obj2->{$m[1]})) {
+                return $obj2->{$m[1]};
+            } else {
+                return "";
+            }
+        }, $itemtpl);
+
+        if (file_exists($obj2->markdown)) {
+            print "Converting {$obj2->markdown} to {$obj2->html}\n";
+            $html = `pandoc --css lib/pandoc.css --highlight-style breezedark -f markdown -t html5 --standalone --metadata title="{$obj2->title}" --self-contained "{$obj2->markdown}" > {$obj2->html}`;
+        }
+ 
+    }
+    $out .= '</ul>';
+    return $out;
+} 
