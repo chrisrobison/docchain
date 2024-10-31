@@ -1,6 +1,9 @@
 #!/usr/local/bin/php
 <?php
 
+if (file_exists("../site.json") && !file_exists("./site.json")) {
+    chdir("..");
+}
 $tree = json_decode(file_get_contents("site.json"));
 
 $itemtpl = <<<EOT
