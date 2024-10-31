@@ -25,12 +25,12 @@
           "className": "overview-page"
         },
         {
-          "id": "analytics",
-          "title": "Analytics",
-          "markdown": "md/analytics.md",
-          "html": "content/analytics.html",
-          "icon": "fa-chart-bar",
-          "className": "analytics-page"
+          "id": "team",
+          "title": "Team",
+          "markdown": "md/team.md",
+          "html": "content/team.html",
+          "icon": "fa-linkedin",
+          "className": "linkedin-page"
         }
       ]
     },

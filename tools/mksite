@@ -34,8 +34,13 @@ foreach ($tree->pages as $obj) {
         }
     }, $itemtpl);
     if (file_exists($obj->markdown)) {
-        print "Converting {$obj->markdown} to {$obj->html}\n";
-        $html = `pandoc --css lib/pandoc.css --highlight-style breezedark -f markdown -t html5 --standalone --metadata title="{$obj->title}" --self-contained "{$obj->markdown}" > {$obj->html}`;
+        $htmltime = filemtime($obj->html);
+        $mdtime = filemtime($obj->markdown);
+
+        if ($mdtime > $htmltime) {
+            print "Converting {$obj->markdown} to {$obj->html}\n";
+            $html = `pandoc --css lib/pandoc.css --highlight-style breezedark -f markdown -t html5 --standalone --metadata title="{$obj->title}" --self-contained "{$obj->markdown}" > {$obj->html}`;
+        }
     }
 }
 $out .= "</ul>";
@@ -43,6 +48,9 @@ $out .= "</ul>";
 $html = file_get_contents("index.template.html");
 $html = preg_replace("/\%\%NAV_MARKUP\%\%/", $out, $html);
 file_put_contents("index.new.html", $html);
+
+print "Wrote ".strlen($html)." bytes to index.new.html\n";
+print "\n\n\033[31mNOTE: \033[0m \033[1;37mBe sure to copy \033[0m\033[0;36mindex.new.html\033[0m to \033[0;36mindex.html\033[0m once checked.\n\n" ;
 $obj2 = new stdClass();
 
 function maketree($items) {
@@ -67,8 +75,13 @@ function maketree($items) {
         }, $itemtpl);
 
         if (file_exists($obj2->markdown)) {
-            print "Converting {$obj2->markdown} to {$obj2->html}\n";
-            $html = `pandoc --css lib/pandoc.css --highlight-style breezedark -f markdown -t html5 --standalone --metadata title="{$obj2->title}" --self-contained "{$obj2->markdown}" > {$obj2->html}`;
+            $htmltime = filemtime($obj2->html);
+            $mdtime = filemtime($obj2->markdown);
+
+            if ($mdtime > $htmltime) {
+                print "Converting {$obj2->markdown} to {$obj2->html}\n";
+                $html = `pandoc --css lib/pandoc.css --highlight-style breezedark -f markdown -t html5 --standalone --metadata title="{$obj2->title}" --self-contained "{$obj2->markdown}" > {$obj2->html}`;
+            }
         }
  
     }
