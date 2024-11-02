@@ -9,9 +9,9 @@ Founded in 2024, DocChain emerged from a simple idea: document notarization shou
 
 ### Leadership Team
 <ul>
-  <li>Christopher Robison, CEO</li>
-  <li>Kevin Ready, CTO</li>
-  <li>Matthew Manion, CFO</li>
+  <li>[Christopher Robison, CEO](/content/team.html#CEO)</li>
+  <li>[Kevin Ready, CTO](/content/team.html#CTO)</li>
+  <li>[Matthew Manion, CFO](/content/team.html#CFO)</li>
 </ul>
 
 ### Technology

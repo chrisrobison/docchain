@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<html lang="" xml:lang="">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>API</title>
   <style>
@@ -80,274 +79,8 @@
     code span.wa { color: #da4453; } /* Warning */
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <style type="text/css">
-html {
-font-size: 100%;
-overflow-y: scroll;
--webkit-text-size-adjust: 100%;
--ms-text-size-adjust: 100%;
-}
-body {
-color: #444;
-font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
-font-size: 12px;
-line-height: 1.7;
-padding: 1em;
-margin: auto;
-max-width: 42em;
-background: #fefefe;
-}
-a {
-color: #0645ad;
-text-decoration: none;
-}
-a:visited {
-color: #0b0080;
-}
-a:hover {
-color: #06e;
-}
-a:active {
-color: #faa700;
-}
-a:focus {
-outline: thin dotted;
-}
-*::-moz-selection {
-background: rgba(255, 255, 0, 0.3);
-color: #000;
-}
-*::selection {
-background: rgba(255, 255, 0, 0.3);
-color: #000;
-}
-a::-moz-selection {
-background: rgba(255, 255, 0, 0.3);
-color: #0645ad;
-}
-a::selection {
-background: rgba(255, 255, 0, 0.3);
-color: #0645ad;
-}
-p {
-margin: 1em 0;
-}
-img {
-max-width: 100%;
-}
-h1, h2, h3, h4, h5, h6 {
-color: #111;
-line-height: 125%;
-margin-top: 2em;
-font-weight: normal;
-}
-h4, h5, h6 {
-font-weight: bold;
-}
-h1 {
-font-size: 2.5em;
-}
-h2 {
-font-size: 2em;
-}
-h3 {
-font-size: 1.5em;
-}
-h4 {
-font-size: 1.2em;
-}
-h5 {
-font-size: 1em;
-}
-h6 {
-font-size: 0.9em;
-}
-blockquote {
-color: #666666;
-margin: 0;
-padding-left: 3em;
-border-left: 0.5em #EEE solid;
-}
-hr {
-display: block;
-height: 2px;
-border: 0;
-border-top: 1px solid #aaa;
-border-bottom: 1px solid #eee;
-margin: 1em 0;
-padding: 0;
-}
-pre, code, kbd, samp {
-color: #000;
-font-family: monospace, monospace;
-_font-family: 'courier new', monospace;
-font-size: 0.98em;
-}
-pre {
-white-space: pre;
-white-space: pre-wrap;
-word-wrap: break-word;
-}
-b, strong {
-font-weight: bold;
-}
-dfn {
-font-style: italic;
-}
-ins {
-background: #ff9;
-color: #000;
-text-decoration: none;
-}
-mark {
-background: #ff0;
-color: #000;
-font-style: italic;
-font-weight: bold;
-}
-sub, sup {
-font-size: 75%;
-line-height: 0;
-position: relative;
-vertical-align: baseline;
-}
-sup {
-top: -0.5em;
-}
-sub {
-bottom: -0.25em;
-}
-ul, ol {
-margin: 1em 0;
-padding: 0 0 0 2em;
-}
-li p:last-child {
-margin-bottom: 0;
-}
-ul ul, ol ol {
-margin: .3em 0;
-}
-dl {
-margin-bottom: 1em;
-}
-dt {
-font-weight: bold;
-margin-bottom: .8em;
-}
-dd {
-margin: 0 0 .8em 2em;
-}
-dd:last-child {
-margin-bottom: 0;
-}
-img {
-border: 0;
--ms-interpolation-mode: bicubic;
-vertical-align: middle;
-}
-figure {
-display: block;
-text-align: center;
-margin: 1em 0;
-}
-figure img {
-border: none;
-margin: 0 auto;
-}
-figcaption {
-font-size: 0.8em;
-font-style: italic;
-margin: 0 0 .8em;
-}
-table {
-margin-bottom: 2em;
-border-bottom: 1px solid #ddd;
-border-right: 1px solid #ddd;
-border-spacing: 0;
-border-collapse: collapse;
-}
-table th {
-padding: .2em 1em;
-background-color: #eee;
-border-top: 1px solid #ddd;
-border-left: 1px solid #ddd;
-}
-table td {
-padding: .2em 1em;
-border-top: 1px solid #ddd;
-border-left: 1px solid #ddd;
-vertical-align: top;
-}
-.author {
-font-size: 1.2em;
-text-align: center;
-}
-#title-block-header {
-display: none; }
-@media only screen and (min-width: 480px) {
-body {
-font-size: 14px;
-}
-}
-@media only screen and (min-width: 768px) {
-body {
-font-size: 16px;
-}
-}
-@media print {
-* {
-background: transparent !important;
-color: black !important;
-filter: none !important;
--ms-filter: none !important;
-}
-body {
-font-size: 12pt;
-max-width: 100%;
-}
-a, a:visited {
-text-decoration: underline;
-}
-hr {
-height: 1px;
-border: 0;
-border-bottom: 1px solid black;
-}
-a[href]:after {
-content: " (" attr(href) ")";
-}
-abbr[title]:after {
-content: " (" attr(title) ")";
-}
-.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
-content: "";
-}
-pre, blockquote {
-border: 1px solid #999;
-padding-right: 1em;
-page-break-inside: avoid;
-}
-tr, img {
-page-break-inside: avoid;
-}
-img {
-max-width: 100% !important;
-}
-@page :left {
-margin: 15mm 20mm 15mm 10mm;
-}
-@page :right {
-margin: 15mm 10mm 15mm 20mm;
-}
-p, h2, h3 {
-orphans: 3;
-widows: 3;
-}
-h2, h3 {
-page-break-after: avoid;
-}
-}
-</style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="lib/pandoc.css" />
 </head>
 <body>
 <header id="title-block-header">
@@ -370,14 +103,16 @@ Content-Type: multipart/form-data</code></pre>
 <code>signers</code>: Array of signer addresses (required) -
 <code>metadata</code>: Additional document metadata (optional)</p>
 <p><strong>Example Request:</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST https://api.docchainnotary.com/v1/documents <span class="dt">\</span></span>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST https://api.docchainnotary.com/v1/documents <span class="dt">\</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> <span class="dt">\</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">&quot;file=@contract.pdf&quot;</span> <span class="dt">\</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">&quot;title=Sales Contract&quot;</span> <span class="dt">\</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">&quot;signers=[</span><span class="dt">\&quot;</span><span class="st">GBXXXX</span><span class="dt">\&quot;</span><span class="st">, </span><span class="dt">\&quot;</span><span class="st">GDXXXX</span><span class="dt">\&quot;</span><span class="st">]&quot;</span> <span class="dt">\</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">&quot;metadata={</span><span class="dt">\&quot;</span><span class="st">department</span><span class="dt">\&quot;</span><span class="st">: </span><span class="dt">\&quot;</span><span class="st">sales</span><span class="dt">\&quot;</span><span class="st">, </span><span class="dt">\&quot;</span><span class="st">contract_type</span><span class="dt">\&quot;</span><span class="st">: </span><span class="dt">\&quot;</span><span class="st">annual</span><span class="dt">\&quot;</span><span class="st">}&quot;</span></span></code></pre></div>
 <p><strong>Example Response:</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;success&quot;</span><span class="fu">,</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;document_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;0x1234567890abcdef...&quot;</span><span class="fu">,</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;tx_123456789&quot;</span><span class="fu">,</span></span>
@@ -396,13 +131,15 @@ Content-Type: multipart/form-data</code></pre>
 file (required) - <code>title</code>: Version title (required) -
 <code>metadata</code>: Version metadata (optional)</p>
 <p><strong>Example Request:</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST https://api.docchainnotary.com/v1/documents/0x1234.../versions <span class="dt">\</span></span>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST https://api.docchainnotary.com/v1/documents/0x1234.../versions <span class="dt">\</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> <span class="dt">\</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">&quot;file=@contract_v2.pdf&quot;</span> <span class="dt">\</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">&quot;title=Sales Contract - Revised&quot;</span> <span class="dt">\</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-F</span> <span class="st">&quot;metadata={</span><span class="dt">\&quot;</span><span class="st">revision</span><span class="dt">\&quot;</span><span class="st">: </span><span class="dt">\&quot;</span><span class="st">2.0</span><span class="dt">\&quot;</span><span class="st">, </span><span class="dt">\&quot;</span><span class="st">changes</span><span class="dt">\&quot;</span><span class="st">: </span><span class="dt">\&quot;</span><span class="st">Updated terms</span><span class="dt">\&quot;</span><span class="st">}&quot;</span></span></code></pre></div>
 <p><strong>Example Response:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;success&quot;</span><span class="fu">,</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;0xabcdef1234...&quot;</span><span class="fu">,</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;tx_987654321&quot;</span><span class="fu">,</span></span>
@@ -413,12 +150,14 @@ file (required) - <code>title</code>: Version title (required) -
 <pre class="http"><code>POST /documents/{document_hash}/signatures
 Content-Type: application/json</code></pre>
 <p><strong>Request Body:</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;signature_data&quot;</span><span class="fu">:</span> <span class="st">&quot;0x9876543210...&quot;</span><span class="fu">,</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;claim_reference&quot;</span><span class="fu">:</span> <span class="st">&quot;claim_123456789&quot;</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p><strong>Example Response:</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;success&quot;</span><span class="fu">,</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;transaction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;tx_567890123&quot;</span><span class="fu">,</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-10-26T16:00:00Z&quot;</span><span class="fu">,</span></span>
@@ -431,7 +170,8 @@ Content-Type: application/json</code></pre>
 <h4 id="get-document-history">Get Document History</h4>
 <pre class="http"><code>GET /documents/{document_hash}/history</code></pre>
 <p><strong>Example Response:</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;current_version&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;hash&quot;</span><span class="fu">:</span> <span class="st">&quot;0x1234567890abcdef...&quot;</span><span class="fu">,</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;Sales Contract - Revised&quot;</span><span class="fu">,</span></span>
@@ -454,7 +194,8 @@ Content-Type: multipart/form-data</code></pre>
 <p><strong>Parameters:</strong> - <code>file</code>: Document to verify
 (required)</p>
 <p><strong>Example Response:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;verified&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;document_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;0x1234567890abcdef...&quot;</span><span class="fu">,</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;notarized_at&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-10-26T14:30:00Z&quot;</span><span class="fu">,</span></span>
@@ -467,14 +208,16 @@ Content-Type: multipart/form-data</code></pre>
 <pre class="http"><code>POST /identity/claims
 Content-Type: application/json</code></pre>
 <p><strong>Request Body:</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;authority_id&quot;</span><span class="fu">:</span> <span class="st">&quot;auth_123456789&quot;</span><span class="fu">,</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;claim_type&quot;</span><span class="fu">:</span> <span class="st">&quot;IDENTITY&quot;</span><span class="fu">,</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;claim_value&quot;</span><span class="fu">:</span> <span class="st">&quot;0x9876543210...&quot;</span><span class="fu">,</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;expiration&quot;</span><span class="fu">:</span> <span class="st">&quot;2025-10-26T00:00:00Z&quot;</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p><strong>Example Response:</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;success&quot;</span><span class="fu">,</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;claim_id&quot;</span><span class="fu">:</span> <span class="st">&quot;claim_123456789&quot;</span><span class="fu">,</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;expiration&quot;</span><span class="fu">:</span> <span class="st">&quot;2025-10-26T00:00:00Z&quot;</span><span class="fu">,</span></span>
@@ -482,7 +225,8 @@ Content-Type: application/json</code></pre>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <h2 id="error-responses">Error Responses</h2>
 <p>All endpoints return standard error responses:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;code&quot;</span><span class="fu">:</span> <span class="st">&quot;ERROR_CODE&quot;</span><span class="fu">,</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Detailed error message&quot;</span><span class="fu">,</span></span>

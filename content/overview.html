@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<html lang="" xml:lang="">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Overview</title>
   <style>
@@ -14,489 +13,244 @@
     ul.task-list{list-style: none;}
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <style type="text/css">
-html {
-font-size: 100%;
-overflow-y: scroll;
--webkit-text-size-adjust: 100%;
--ms-text-size-adjust: 100%;
-}
-body {
-color: #444;
-font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
-font-size: 12px;
-line-height: 1.7;
-padding: 1em;
-margin: auto;
-max-width: 42em;
-background: #fefefe;
-}
-a {
-color: #0645ad;
-text-decoration: none;
-}
-a:visited {
-color: #0b0080;
-}
-a:hover {
-color: #06e;
-}
-a:active {
-color: #faa700;
-}
-a:focus {
-outline: thin dotted;
-}
-*::-moz-selection {
-background: rgba(255, 255, 0, 0.3);
-color: #000;
-}
-*::selection {
-background: rgba(255, 255, 0, 0.3);
-color: #000;
-}
-a::-moz-selection {
-background: rgba(255, 255, 0, 0.3);
-color: #0645ad;
-}
-a::selection {
-background: rgba(255, 255, 0, 0.3);
-color: #0645ad;
-}
-p {
-margin: 1em 0;
-}
-img {
-max-width: 100%;
-}
-h1, h2, h3, h4, h5, h6 {
-color: #111;
-line-height: 125%;
-margin-top: 2em;
-font-weight: normal;
-}
-h4, h5, h6 {
-font-weight: bold;
-}
-h1 {
-font-size: 2.5em;
-}
-h2 {
-font-size: 2em;
-}
-h3 {
-font-size: 1.5em;
-}
-h4 {
-font-size: 1.2em;
-}
-h5 {
-font-size: 1em;
-}
-h6 {
-font-size: 0.9em;
-}
-blockquote {
-color: #666666;
-margin: 0;
-padding-left: 3em;
-border-left: 0.5em #EEE solid;
-}
-hr {
-display: block;
-height: 2px;
-border: 0;
-border-top: 1px solid #aaa;
-border-bottom: 1px solid #eee;
-margin: 1em 0;
-padding: 0;
-}
-pre, code, kbd, samp {
-color: #000;
-font-family: monospace, monospace;
-_font-family: 'courier new', monospace;
-font-size: 0.98em;
-}
-pre {
-white-space: pre;
-white-space: pre-wrap;
-word-wrap: break-word;
-}
-b, strong {
-font-weight: bold;
-}
-dfn {
-font-style: italic;
-}
-ins {
-background: #ff9;
-color: #000;
-text-decoration: none;
-}
-mark {
-background: #ff0;
-color: #000;
-font-style: italic;
-font-weight: bold;
-}
-sub, sup {
-font-size: 75%;
-line-height: 0;
-position: relative;
-vertical-align: baseline;
-}
-sup {
-top: -0.5em;
-}
-sub {
-bottom: -0.25em;
-}
-ul, ol {
-margin: 1em 0;
-padding: 0 0 0 2em;
-}
-li p:last-child {
-margin-bottom: 0;
-}
-ul ul, ol ol {
-margin: .3em 0;
-}
-dl {
-margin-bottom: 1em;
-}
-dt {
-font-weight: bold;
-margin-bottom: .8em;
-}
-dd {
-margin: 0 0 .8em 2em;
-}
-dd:last-child {
-margin-bottom: 0;
-}
-img {
-border: 0;
--ms-interpolation-mode: bicubic;
-vertical-align: middle;
-}
-figure {
-display: block;
-text-align: center;
-margin: 1em 0;
-}
-figure img {
-border: none;
-margin: 0 auto;
-}
-figcaption {
-font-size: 0.8em;
-font-style: italic;
-margin: 0 0 .8em;
-}
-table {
-margin-bottom: 2em;
-border-bottom: 1px solid #ddd;
-border-right: 1px solid #ddd;
-border-spacing: 0;
-border-collapse: collapse;
-}
-table th {
-padding: .2em 1em;
-background-color: #eee;
-border-top: 1px solid #ddd;
-border-left: 1px solid #ddd;
-}
-table td {
-padding: .2em 1em;
-border-top: 1px solid #ddd;
-border-left: 1px solid #ddd;
-vertical-align: top;
-}
-.author {
-font-size: 1.2em;
-text-align: center;
-}
-#title-block-header {
-display: none; }
-@media only screen and (min-width: 480px) {
-body {
-font-size: 14px;
-}
-}
-@media only screen and (min-width: 768px) {
-body {
-font-size: 16px;
-}
-}
-@media print {
-* {
-background: transparent !important;
-color: black !important;
-filter: none !important;
--ms-filter: none !important;
-}
-body {
-font-size: 12pt;
-max-width: 100%;
-}
-a, a:visited {
-text-decoration: underline;
-}
-hr {
-height: 1px;
-border: 0;
-border-bottom: 1px solid black;
-}
-a[href]:after {
-content: " (" attr(href) ")";
-}
-abbr[title]:after {
-content: " (" attr(title) ")";
-}
-.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
-content: "";
-}
-pre, blockquote {
-border: 1px solid #999;
-padding-right: 1em;
-page-break-inside: avoid;
-}
-tr, img {
-page-break-inside: avoid;
-}
-img {
-max-width: 100% !important;
-}
-@page :left {
-margin: 15mm 20mm 15mm 10mm;
-}
-@page :right {
-margin: 15mm 10mm 15mm 20mm;
-}
-p, h2, h3 {
-orphans: 3;
-widows: 3;
-}
-h2, h3 {
-page-break-after: avoid;
-}
-}
-</style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="lib/pandoc.css" />
 </head>
 <body>
 <header id="title-block-header">
 <h1 class="title">Overview</h1>
 </header>
-<p><strong>Overview of Our Decentralized Digital Notary
-Service</strong></p>
-<p><strong>What the Product Is:</strong></p>
-<p>Our product is a <strong>Decentralized Digital Notary
-Service</strong> that allows individuals and businesses to securely
-notarize and verify documents using blockchain technology. By leveraging
-the Stellar blockchain and Soroban smart contracts, we provide a
-platform where users can create a tamper-proof, timestamped, and
-publicly verifiable proof of authenticity for any digital document
-without relying on centralized authorities.</p>
+<h1 id="overview">Overview</h1>
+<h2 id="decentralized-digital-document-notary">Decentralized Digital
+Document Notary</h2>
+<p>Our product is a <strong>Blockchain-based, Decentralized Digital
+Notary Service</strong> that allows individuals and businesses to
+securely notarize, sign and verify documents using blockchain
+technology. By leveraging the Stellar blockchain and Soroban smart
+contracts, we provide a platform where users can create a tamper-proof,
+timestamped, and publicly verifiable proof of authenticity for any
+digital document without relying on centralized authorities.</p>
 <hr />
-<p><strong>What Problems It Solves:</strong></p>
+<h2 id="the-problem">The Problem:</h2>
+<p>Traditional notary services require the document and any signers to
+be physically present before a notary to record a document. This need
+for physical presence and a printed document has a long list of
+drawbacks.</p>
 <ol type="1">
-<li><strong>Inefficiency of Traditional Notary Services:</strong>
+<li><p><strong>Inefficiency of Traditional Notary Services:</strong></p>
+<p>Traditional notarization processes are time-consuming. They often
+require scheduling appointments, appearing in person, and handling
+manual paperwork, all of which can cause delays. This makes it
+challenging for busy individuals or businesses who need efficient
+document handling.</p>
+<p>Geographical limitations also present significant barriers. Access to
+notary services can be limited, particularly in remote or underserved
+areas, making it difficult for individuals and businesses to get
+documents notarized promptly and often leading to logistical
+frustrations.</p>
+<p>Additionally, traditional notarization can be costly. The fees
+associated with these services are often prohibitive, especially for
+those requiring frequent notarizations or bulk document processing. High
+costs make it difficult for some users to access this essential service
+conveniently and affordably.</p></li>
+<li><p><strong>Security Concerns:</strong></p>
+<p>Traditional notary services pose security risks, as physical
+documents and centralized digital records are susceptible to tampering,
+loss, or destruction. These vulnerabilities can lead to disputes over
+document authenticity, impacting trust in critical transactions.</p>
+<p>Furthermore, traditional notarization lacks transparency. Verifying
+the authenticity of a notarized document often requires manual checks
+and reliance on trust, which can be cumbersome and, in some cases,
+unreliable. This opacity can hinder verification processes and reduce
+confidence in notarized documents.</p></li>
+<li><p><strong>Dependency on Centralized Authorities:</strong></p>
+<p>Relying on centralized notary authorities introduces a single point
+of failure. These systems can be compromised by corruption, technical
+failures, or malicious attacks, jeopardizing document security and
+undermining the integrity of the notarization process.</p>
+<p>Limited accessibility also remains a problem with centralized
+authorities. Operating hours and regional regulations restrict access to
+notary services, creating barriers for users needing timely
+notarizations. This dependency on centralized systems prevents the
+flexibility required by today’s digital and fast-paced world.</p></li>
+</ol>
+<hr />
+<h2 id="our-solution">Our Solution:</h2>
+<p>Our service harnesses the Stellar blockchain’s power of immutability
+and transparency to deliver a notarization process that’s both secure
+and highly convenient. Each document’s content generates a unique
+identifier, or “hash,” which we store on the blockchain along with a
+timestamp and owner information. Once recorded, the document’s
+authenticity can be verified anytime by simply matching its hash with
+the one stored on the blockchain, ensuring a seamless and trustworthy
+notarization experience.</p>
+<p>The DocChain Digital Notary service provides:</p>
+<ol type="1">
+<li>Efficiency and Convenience:
 <ul>
-<li><strong>Time-Consuming Processes:</strong> Traditional notarization
-often requires scheduling appointments, physical presence, and manual
-paperwork, leading to delays.</li>
-<li><strong>Geographical Limitations:</strong> Access to notary services
-can be limited, especially in remote areas, making it difficult for some
-individuals and businesses to get documents notarized promptly.</li>
-<li><strong>High Costs:</strong> Fees associated with traditional notary
-services can be prohibitive, especially for frequent or bulk
+<li>24/7 Availability: Our online platform is accessible anytime,
+anywhere, eliminating the need for physical appointments.</li>
+<li>Instant Notarization: Documents can be notarized in minutes,
+significantly reducing turnaround times.</li>
+</ul></li>
+<li>Enhanced Security:
+<ul>
+<li>Immutable Records: Utilizing blockchain technology ensures that once
+a document is notarized, the record cannot be altered or deleted.</li>
+<li>Tamper-Proof Verification: The cryptographic hashing of documents
+guarantees that any changes to the document will invalidate the hash,
+alerting to tampering.</li>
+</ul></li>
+<li>Cost-Effectiveness:
+<ul>
+<li>Low Transaction Fees: The Stellar network offers minimal transaction
+costs, making notarization affordable for both individuals and
+businesses.</li>
+<li>Scalability for Bulk Use: Our platform can handle high volumes of
+documents efficiently, ideal for businesses requiring frequent
 notarizations.</li>
 </ul></li>
-<li><strong>Security Concerns:</strong>
+<li>Decentralization and Transparency:
 <ul>
-<li><strong>Risk of Tampering:</strong> Physical documents and
-centralized digital records are susceptible to tampering, loss, or
-destruction.</li>
-<li><strong>Lack of Transparency:</strong> Verifying the authenticity of
-a notarized document can be cumbersome and sometimes unreliable.</li>
-</ul></li>
-<li><strong>Dependency on Centralized Authorities:</strong>
-<ul>
-<li><strong>Single Point of Failure:</strong> Centralized notary
-services can be compromised due to corruption, technical failures, or
-malicious attacks.</li>
-<li><strong>Limited Accessibility:</strong> Operating hours and regional
-regulations can restrict access to notary services when and where they
-are needed.</li>
+<li>No Central Authority Needed: By removing intermediaries, we reduce
+the risk of corruption and increase trust in the notarization
+process.</li>
+<li>Publicly Verifiable: Anyone can independently verify the
+authenticity of a notarized document through the blockchain.</li>
 </ul></li>
 </ol>
 <hr />
-<p><strong>How It Solves Them:</strong></p>
-<ol type="1">
-<li><strong>Efficiency and Convenience:</strong>
+<h2 id="audience-and-benefits">Audience and Benefits:</h2>
+<h3 id="target-audience">Target Audience:</h3>
+<p>The potential for online document notarization services cannot be
+overstated. Recent changes in California and other states laws now allow
+for remote online notarization services for the very first time. Our
+target audience includes:</p>
 <ul>
-<li><strong>24/7 Availability:</strong> Our online platform is
-accessible anytime, anywhere, eliminating the need for physical
-appointments.</li>
-<li><strong>Instant Notarization:</strong> Documents can be notarized in
-minutes, significantly reducing turnaround times.</li>
-</ul></li>
-<li><strong>Enhanced Security:</strong>
-<ul>
-<li><strong>Immutable Records:</strong> Utilizing blockchain technology
-ensures that once a document is notarized, the record cannot be altered
-or deleted.</li>
-<li><strong>Tamper-Proof Verification:</strong> The cryptographic
-hashing of documents guarantees that any changes to the document will
-invalidate the hash, alerting to tampering.</li>
-</ul></li>
-<li><strong>Cost-Effectiveness:</strong>
-<ul>
-<li><strong>Low Transaction Fees:</strong> The Stellar network offers
-minimal transaction costs, making notarization affordable for both
-individuals and businesses.</li>
-<li><strong>Scalability for Bulk Use:</strong> Our platform can handle
-high volumes of documents efficiently, ideal for businesses requiring
-frequent notarizations.</li>
-</ul></li>
-<li><strong>Decentralization and Transparency:</strong>
-<ul>
-<li><strong>No Central Authority Needed:</strong> By removing
-intermediaries, we reduce the risk of corruption and increase trust in
-the notarization process.</li>
-<li><strong>Publicly Verifiable:</strong> Anyone can independently
-verify the authenticity of a notarized document through the
-blockchain.</li>
-</ul></li>
-</ol>
-<hr />
-<p><strong>Audience and Benefits:</strong></p>
-<p><strong>Target Audience:</strong></p>
-<ul>
-<li><strong>Individuals:</strong> People needing notarization for
-personal documents such as wills, deeds, or intellectual property
-claims.</li>
-<li><strong>Businesses:</strong> Companies requiring regular
-notarization for contracts, agreements, and compliance documents.</li>
-<li><strong>Legal Professionals:</strong> Lawyers and law firms looking
-for efficient ways to authenticate legal documents.</li>
-<li><strong>Industries with Compliance Needs:</strong> Sectors like
-finance, real estate, healthcare, and education that demand secure and
-verifiable documentation.</li>
+<li>Individuals: People needing notarization for personal documents such
+as wills, deeds, or intellectual property claims.</li>
+<li>Businesses: Companies requiring regular notarization for contracts,
+agreements, and compliance documents.</li>
+<li>Legal Professionals: Lawyers and law firms looking for efficient
+ways to authenticate legal documents.</li>
+<li>Industries with Compliance Needs: Sectors like finance, real estate,
+healthcare, and education that demand secure and verifiable
+documentation.</li>
 </ul>
-<p><strong>Benefits:</strong></p>
+<h3 id="benefits">Benefits:</h3>
+<p>The radical departure from traditional the notarization process
+provides a seemingly endless list of benefits:</p>
 <ul>
-<li><strong>Time Savings:</strong> Expedite the notarization process,
-allowing users to focus on their core activities.</li>
-<li><strong>Increased Security:</strong> Protect sensitive documents
-with blockchain’s robust security features.</li>
-<li><strong>Global Access:</strong> Provide notarization services to
-users regardless of their geographical location.</li>
-<li><strong>Transparency and Trust:</strong> Build confidence through
-publicly verifiable records without compromising privacy.</li>
-<li><strong>Environmental Impact:</strong> Reduce paper usage and the
-carbon footprint associated with physical notarization processes.</li>
+<li>Time Savings: Expedite the notarization process, allowing users to
+focus on their core activities.</li>
+<li>Increased Security: Protect sensitive documents with blockchain’s
+robust security features.</li>
+<li>Global Access: Provide notarization services to users regardless of
+their geographical location.</li>
+<li>Transparency and Trust: Build confidence through publicly verifiable
+records without compromising privacy.</li>
+<li>Environmental Impact: Reduce paper usage and the carbon footprint
+associated with physical notarization processes.</li>
 </ul>
 <hr />
-<p><strong>How It Works and How It Uses Blockchain:</strong></p>
+<h2 id="how-it-works">How It Works:</h2>
+<p>The following is a breakdown of the various processes involved with
+document notarization and verfication:</p>
 <ol type="1">
-<li><strong>User Registration and Access:</strong>
+<li>User Registration and Access:
 <ul>
 <li>Users sign up on our platform using their credentials and, if
 necessary, connect their Stellar wallet for blockchain
 interactions.</li>
 </ul></li>
-<li><strong>Document Hashing:</strong>
+<li>Document Hashing:
 <ul>
-<li><strong>Local Hashing:</strong> When a user wants to notarize a
-document, it is hashed locally in their browser using a cryptographic
-algorithm (SHA-256). This ensures the actual content of the document
-remains private and is never uploaded or stored on our servers or the
+<li>Local Hashing: When a user wants to notarize a document, it is
+hashed locally in their browser using a cryptographic algorithm
+(SHA-256). This ensures the actual content of the document remains
+private and is never uploaded or stored on our servers or the
 blockchain.</li>
-<li><strong>Unique Digital Fingerprint:</strong> The resulting hash is a
-unique digital fingerprint of the document.</li>
+<li>Unique Digital Fingerprint: The resulting hash is a unique digital
+fingerprint of the document.</li>
 </ul></li>
-<li><strong>Notarization Process:</strong>
+<li>Notarization Process:
 <ul>
-<li><strong>Smart Contract Interaction:</strong> The document hash,
-along with the user’s Stellar address, is sent to a Soroban smart
-contract on the Stellar blockchain.</li>
-<li><strong>Recording on Blockchain:</strong> The smart contract records
-the hash and a timestamp on the blockchain, creating an immutable and
-publicly verifiable record.</li>
-<li><strong>Transaction Confirmation:</strong> The user receives a
-transaction ID and a confirmation that the document has been
-successfully notarized.</li>
+<li>Smart Contract Interaction: The document hash, along with the user’s
+Stellar address, is sent to a Soroban smart contract on the Stellar
+blockchain.</li>
+<li>Recording on Blockchain: The smart contract records the hash and a
+timestamp on the blockchain, creating an immutable and publicly
+verifiable record.</li>
+<li>Transaction Confirmation: The user receives a transaction ID and a
+confirmation that the document has been successfully notarized.</li>
 </ul></li>
-<li><strong>Verification Process:</strong>
+<li>Verification Process:
 <ul>
-<li><strong>Hash Matching:</strong> To verify a document, the user or
-any third party can hash the document using the same algorithm and check
-if the hash exists on the blockchain.</li>
-<li><strong>Blockchain Lookup:</strong> By searching the blockchain
-records for the hash, one can confirm the document’s authenticity and
-the exact time it was notarized.</li>
+<li>Hash Matching: To verify a document, the user or any third party can
+hash the document using the same algorithm and check if the hash exists
+on the blockchain.</li>
+<li>Blockchain Lookup: By searching the blockchain records for the hash,
+one can confirm the document’s authenticity and the exact time it was
+notarized.</li>
 </ul></li>
-<li><strong>Security Measures:</strong>
+<li>Security Measures:
 <ul>
-<li><strong>Decentralization:</strong> The use of blockchain eliminates
-single points of failure, enhancing security.</li>
-<li><strong>Immutable Ledger:</strong> Once data is recorded on the
-blockchain, it cannot be altered, ensuring the integrity of the
-notarization.</li>
+<li>Decentralization: The use of blockchain eliminates single points of
+failure, enhancing security.</li>
+<li>Immutable Ledger: Once data is recorded on the blockchain, it cannot
+be altered, ensuring the integrity of the notarization.</li>
 </ul></li>
-<li><strong>Optional Features:</strong>
+<li>Optional Features:
 <ul>
-<li><strong>Integration with IPFS:</strong> For users who wish to store
-their documents in a decentralized manner, we offer integration with the
-InterPlanetary File System (IPFS), linking the document’s IPFS hash with
-the blockchain record.</li>
-<li><strong>Multi-Signature Support:</strong> Allowing multiple parties
-to sign and notarize a document collaboratively.</li>
+<li>Integration with IPFS: For users who wish to store their documents
+in a decentralized manner, we offer integration with the InterPlanetary
+File System (IPFS), linking the document’s IPFS hash with the blockchain
+record.</li>
+<li>Multi-Signature Support: Allowing multiple parties to sign and
+notarize a document collaboratively.</li>
 </ul></li>
 </ol>
-<p><strong>Use of Blockchain Technology:</strong></p>
+<h2 id="use-of-blockchain-technology">Use of Blockchain Technology:</h2>
+<p>DocChain utilizes the Stellar blockchain and Soroban Smart Contracts
+to facilitate notarizing and verifying documents:</p>
 <ul>
-<li><strong>Stellar Blockchain:</strong>
+<li>Stellar Blockchain:
 <ul>
-<li><strong>Efficiency:</strong> Stellar’s fast transaction times and
-low fees make it ideal for our service, ensuring quick and affordable
-notarizations.</li>
-<li><strong>Scalability:</strong> Capable of handling a high volume of
-transactions, accommodating growth in user adoption.</li>
+<li>Efficiency: Stellar’s fast transaction times and low fees make it
+ideal for our service, ensuring quick and affordable notarizations.</li>
+<li>Scalability: Capable of handling a high volume of transactions,
+accommodating growth in user adoption.</li>
 </ul></li>
-<li><strong>Soroban Smart Contracts:</strong>
+<li>Soroban Smart Contracts:
 <ul>
-<li><strong>Automation:</strong> Smart contracts automate the recording
-and verification processes without the need for intermediaries.</li>
-<li><strong>Security:</strong> Soroban provides a secure environment for
-executing smart contracts, reducing vulnerabilities.</li>
+<li>Automation: Smart contracts automate the recording and verification
+processes without the need for intermediaries.</li>
+<li>Security: Soroban provides a secure environment for executing smart
+contracts, reducing vulnerabilities.</li>
 </ul></li>
-<li><strong>Public Ledger:</strong>
+<li>Public Ledger:
 <ul>
-<li><strong>Transparency:</strong> The blockchain acts as a transparent
-ledger that can be independently audited.</li>
-<li><strong>Accessibility:</strong> Anyone can access the blockchain to
-verify documents without special permissions.</li>
+<li>Transparency: The blockchain acts as a transparent ledger that can
+be independently audited.</li>
+<li>Accessibility: Anyone can access the blockchain to verify documents
+without special permissions.</li>
 </ul></li>
 </ul>
 <hr />
-<p><strong>Conclusion:</strong></p>
-<p>Our Decentralized Digital Notary Service revolutionizes the
+<p>Our –Decentralized Digital Notary Service– revolutionizes the
 notarization process by making it more efficient, secure, and accessible
 through blockchain technology. By addressing the limitations of
 traditional notary services, we provide a solution that benefits a wide
 range of users—from individuals to large enterprises—empowering them to
 notarize and verify documents with confidence and ease.</p>
-<p><strong>Key Takeaways:</strong></p>
+<h2 id="tldr">tl;dr:</h2>
 <ul>
-<li><strong>Innovation in Notarization:</strong> Introducing a modern
-approach to an age-old process by leveraging cutting-edge
-technology.</li>
-<li><strong>Empowerment Through Technology:</strong> Giving users
-control over their documents without reliance on third parties.</li>
-<li><strong>Building Trust:</strong> Enhancing trust in digital
-documents through transparency and immutable records.</li>
+<li>Innovation in Notarization: Introducing a modern approach to an
+age-old process by leveraging cutting-edge technology.</li>
+<li>Empowerment Through Technology: Giving users control over their
+documents without reliance on third parties.</li>
+<li>Building Trust: Enhancing trust in digital documents through
+transparency and immutable records.</li>
 </ul>
 <p>We believe that our service will set a new standard in document
 authentication, paving the way for broader adoption of blockchain

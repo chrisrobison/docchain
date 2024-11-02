@@ -1,5 +1,6 @@
-# DocChain Technical Architecture
-## System Architecture & Stellar Integration Specification
+# Architecture
+
+## Cutting Edge Technology Stack 
 
 ### 1. System Overview
 

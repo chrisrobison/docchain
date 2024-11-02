@@ -15,7 +15,6 @@ body {
   font-size: 12px;
   line-height: 1.7;
   padding: 1em;
-  margin: auto;
   max-width: 42em;
   background: #fefefe;
 }
@@ -72,12 +71,12 @@ img {
 h1, h2, h3, h4, h5, h6 {
   color: #111;
   line-height: 125%;
-  margin-top: 2em;
+  margin-top: 0;
   font-weight: normal;
 }
 
 h4, h5, h6 {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 h1 {

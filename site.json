@@ -29,16 +29,16 @@
           "title": "Team",
           "markdown": "md/team.md",
           "html": "content/team.html",
-          "icon": "fa-linkedin",
-          "className": "linkedin-page"
+          "icon": "fa-people-group",
+          "className": "team-page"
         }
       ]
     },
     {
       "id": "platform",
       "title": "Platform",
-      "markdown": "",
-      "html": "#",
+      "markdown": "md/platform.md",
+      "html": "content/platform.html",
       "icon": "fa-layer-group",
       "className": "platform-section",
       "_children": [

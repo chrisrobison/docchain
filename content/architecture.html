@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<html lang="" xml:lang="">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Architecture</title>
   <style>
@@ -80,283 +79,16 @@
     code span.wa { color: #da4453; } /* Warning */
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <style type="text/css">
-html {
-font-size: 100%;
-overflow-y: scroll;
--webkit-text-size-adjust: 100%;
--ms-text-size-adjust: 100%;
-}
-body {
-color: #444;
-font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
-font-size: 12px;
-line-height: 1.7;
-padding: 1em;
-margin: auto;
-max-width: 42em;
-background: #fefefe;
-}
-a {
-color: #0645ad;
-text-decoration: none;
-}
-a:visited {
-color: #0b0080;
-}
-a:hover {
-color: #06e;
-}
-a:active {
-color: #faa700;
-}
-a:focus {
-outline: thin dotted;
-}
-*::-moz-selection {
-background: rgba(255, 255, 0, 0.3);
-color: #000;
-}
-*::selection {
-background: rgba(255, 255, 0, 0.3);
-color: #000;
-}
-a::-moz-selection {
-background: rgba(255, 255, 0, 0.3);
-color: #0645ad;
-}
-a::selection {
-background: rgba(255, 255, 0, 0.3);
-color: #0645ad;
-}
-p {
-margin: 1em 0;
-}
-img {
-max-width: 100%;
-}
-h1, h2, h3, h4, h5, h6 {
-color: #111;
-line-height: 125%;
-margin-top: 2em;
-font-weight: normal;
-}
-h4, h5, h6 {
-font-weight: bold;
-}
-h1 {
-font-size: 2.5em;
-}
-h2 {
-font-size: 2em;
-}
-h3 {
-font-size: 1.5em;
-}
-h4 {
-font-size: 1.2em;
-}
-h5 {
-font-size: 1em;
-}
-h6 {
-font-size: 0.9em;
-}
-blockquote {
-color: #666666;
-margin: 0;
-padding-left: 3em;
-border-left: 0.5em #EEE solid;
-}
-hr {
-display: block;
-height: 2px;
-border: 0;
-border-top: 1px solid #aaa;
-border-bottom: 1px solid #eee;
-margin: 1em 0;
-padding: 0;
-}
-pre, code, kbd, samp {
-color: #000;
-font-family: monospace, monospace;
-_font-family: 'courier new', monospace;
-font-size: 0.98em;
-}
-pre {
-white-space: pre;
-white-space: pre-wrap;
-word-wrap: break-word;
-}
-b, strong {
-font-weight: bold;
-}
-dfn {
-font-style: italic;
-}
-ins {
-background: #ff9;
-color: #000;
-text-decoration: none;
-}
-mark {
-background: #ff0;
-color: #000;
-font-style: italic;
-font-weight: bold;
-}
-sub, sup {
-font-size: 75%;
-line-height: 0;
-position: relative;
-vertical-align: baseline;
-}
-sup {
-top: -0.5em;
-}
-sub {
-bottom: -0.25em;
-}
-ul, ol {
-margin: 1em 0;
-padding: 0 0 0 2em;
-}
-li p:last-child {
-margin-bottom: 0;
-}
-ul ul, ol ol {
-margin: .3em 0;
-}
-dl {
-margin-bottom: 1em;
-}
-dt {
-font-weight: bold;
-margin-bottom: .8em;
-}
-dd {
-margin: 0 0 .8em 2em;
-}
-dd:last-child {
-margin-bottom: 0;
-}
-img {
-border: 0;
--ms-interpolation-mode: bicubic;
-vertical-align: middle;
-}
-figure {
-display: block;
-text-align: center;
-margin: 1em 0;
-}
-figure img {
-border: none;
-margin: 0 auto;
-}
-figcaption {
-font-size: 0.8em;
-font-style: italic;
-margin: 0 0 .8em;
-}
-table {
-margin-bottom: 2em;
-border-bottom: 1px solid #ddd;
-border-right: 1px solid #ddd;
-border-spacing: 0;
-border-collapse: collapse;
-}
-table th {
-padding: .2em 1em;
-background-color: #eee;
-border-top: 1px solid #ddd;
-border-left: 1px solid #ddd;
-}
-table td {
-padding: .2em 1em;
-border-top: 1px solid #ddd;
-border-left: 1px solid #ddd;
-vertical-align: top;
-}
-.author {
-font-size: 1.2em;
-text-align: center;
-}
-#title-block-header {
-display: none; }
-@media only screen and (min-width: 480px) {
-body {
-font-size: 14px;
-}
-}
-@media only screen and (min-width: 768px) {
-body {
-font-size: 16px;
-}
-}
-@media print {
-* {
-background: transparent !important;
-color: black !important;
-filter: none !important;
--ms-filter: none !important;
-}
-body {
-font-size: 12pt;
-max-width: 100%;
-}
-a, a:visited {
-text-decoration: underline;
-}
-hr {
-height: 1px;
-border: 0;
-border-bottom: 1px solid black;
-}
-a[href]:after {
-content: " (" attr(href) ")";
-}
-abbr[title]:after {
-content: " (" attr(title) ")";
-}
-.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
-content: "";
-}
-pre, blockquote {
-border: 1px solid #999;
-padding-right: 1em;
-page-break-inside: avoid;
-}
-tr, img {
-page-break-inside: avoid;
-}
-img {
-max-width: 100% !important;
-}
-@page :left {
-margin: 15mm 20mm 15mm 10mm;
-}
-@page :right {
-margin: 15mm 10mm 15mm 20mm;
-}
-p, h2, h3 {
-orphans: 3;
-widows: 3;
-}
-h2, h3 {
-page-break-after: avoid;
-}
-}
-</style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="lib/pandoc.css" />
 </head>
 <body>
 <header id="title-block-header">
 <h1 class="title">Architecture</h1>
 </header>
-<h1 id="docchain-technical-architecture">DocChain Technical
-Architecture</h1>
-<h2 id="system-architecture-stellar-integration-specification">System
-Architecture &amp; Stellar Integration Specification</h2>
+<h1 id="architecture">Architecture</h1>
+<h2 id="cutting-edge-technology-stack">Cutting Edge Technology
+Stack</h2>
 <h3 id="system-overview">1. System Overview</h3>
 <p>DocChain is built on a microservices architecture with Stellar
 blockchain integration for document notarization and verification. The
@@ -412,7 +144,8 @@ Service (Python)</h4>
 <h5 id="stellar-integration-details">Stellar Integration Details</h5>
 <ol type="1">
 <li><p><strong>Transaction Management</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> StellarTransaction {</span>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> StellarTransaction {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  sourceAccount<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  documentHash<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  timestamp<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
@@ -423,7 +156,8 @@ Service (Python)</h4>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
 <li><p><strong>Smart Contract Implementation</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NotaryContract {</span>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NotaryContract {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stellar account for the contract</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> contractAccount<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -548,7 +282,8 @@ Service (Python)</h4>
 <li>Monitoring systems</li>
 </ul>
 <h4 id="apis">6.2 APIs</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> NotaryAPI {</span>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> NotaryAPI {</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Document Management</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">uploadDocument</span>(file<span class="op">:</span> <span class="bu">File</span><span class="op">,</span> metadata<span class="op">:</span> Metadata)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>UploadResult<span class="op">&gt;;</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">verifyDocument</span>(hash<span class="op">:</span> <span class="dt">string</span>)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span>VerificationResult<span class="op">&gt;;</span></span>
