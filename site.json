@@ -31,7 +31,16 @@
           "html": "content/team.html",
           "icon": "fa-people-group",
           "className": "team-page"
+        },
+        {
+          "id": "pitch",
+          "title": "Elevator Pitch",
+          "markdown": "md/pitch.md",
+          "html": "content/pitch.html",
+          "icon": "fa-person-chalkboard",
+          "className": "pitch-page"
         }
+
       ]
     },
     {

@@ -8,6 +8,7 @@ if (file_exists("../site.json") && !file_exists("./site.json")) {
 $exe = array_shift($argv);
 $verbose = 0;
 $force = 0;
+$files = [];
 
 while ($arg = array_shift($argv)) {
     switch ($arg) {
@@ -18,10 +19,25 @@ while ($arg = array_shift($argv)) {
         $verbose = 1;
         break;
     default:
-
+        $files[] = $arg;
         
     }
 }
+
+if (count($files)) {
+    foreach ($files as $file) {
+        $obj = new stdClass();
+        if (preg_match("/\/(.+?)\.md/", $file, $m)) {
+            $id = $m[1];
+        }
+        $obj->html = "content/{$id}.html";
+        $obj->title = ucfirst($id);
+        $obj->markdown = "md/{$id}.md";
+
+        convert($obj);        
+    }
+    exit;
+} 
 
 if (!file_exists("site.json")) {
     print "ERROR: No site.json in current directory.\n\nScript must be run from root of project.\n";
@@ -104,4 +120,18 @@ function maketree($items, $noul=0) {
     if (!$noul) $out .= '</ul>';
     
     return $out;
-} 
+}
+
+function convert($obj) {
+    global $verbose;
+    print "Converting {$obj->markdown} to {$obj->html}\n";
+    $cmd = "pandoc --template default.template.html --css lib/pandoc.css --highlight-style breezedark -f markdown -t html5 --standalone --metadata title=\"{$obj->title}\" \"{$obj->markdown}\"";
+    if ($verbose) print $cmd."\n";
+    $html = `$cmd`;
+
+    if (isset($html) && isset($obj->html)) {
+        file_put_contents($obj->html, $html);
+    }
+    
+    return $html;
+}
