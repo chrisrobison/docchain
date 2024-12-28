@@ -1,10 +1,5 @@
-# Elevator Pitch
+You know how when you need something notarized, it’s such a hassle? You’ve got to find a notary, set up an appointment, gather all your paperwork, drive over there, and sometimes pay a pretty steep fee — all just to verify a document. Well, that’s exactly what we’re fixing with DocChain Digital Notary.
 
-## A Quick Overview of DocChain Online Notary
+DocChain is all about making document notarization and authentication as easy as clicking a button from anywhere. You upload your document, and instead of driving downtown and sitting in someone’s office, our system uses the latest cryptographic technology to create a unique, secure fingerprint for it. That fingerprint goes on the Stellar blockchain, where it’s locked down and can’t be tampered with, so anyone can verify it anytime, from anywhere.
 
-Imagine a world where notarizing a document is as simple as clicking a button, no matter where you are. Our project, the **DocChain Digital Notary Service**, brings notarization into the digital age by leveraging the security and transparency of blockchain technology. Traditional notary processes are outdated, requiring in-person appointments, paper documents, and high fees, creating barriers that are costly, inefficient, and inaccessible to many. 
-
-DocChain transforms this experience. With our platform, users can securely notarize and verify documents online, 24/7, without leaving their homes. Each document is cryptographically hashed and stored on the Stellar blockchain, making it tamper-proof and instantly verifiable by anyone, anywhere. This solution not only saves time and money but also eliminates the need for centralized authorities, providing a more secure, transparent, and accessible way to handle legal documentation.
-
-By supporting DocChain, you’re investing in a future where notarization is as seamless as sending an email—a future where individuals, businesses, and communities have easy access to secure, affordable, and reliable document authentication, regardless of their location.
-
+Basically, with DocChain, we’re getting rid of the middleman, saving time and money, and making notarization super accessible. Imagine being able to handle important docs as easily as sending an email—that’s the future we’re building.

@@ -122,20 +122,36 @@
       ]
     },
     {
-      "id": "pricing",
-      "title": "Pricing & Plans",
-      "markdown": "md/pricing.md",
-      "html": "content/pricing.html",
+      "id": "legal",
+      "title": "Legal",
+      "markdown": "md/policies.md",
+      "html": "content/policies.html",
       "icon": "fa-dollar-sign",
-      "className": "pricing-section",
+      "className": "policies-section",
       "_children": [
         {
-          "id": "monetization",
-          "title": "Monetization",
-          "markdown": "md/monetization.md",
-          "html": "content/monetization.html",
+          "id": "privacy",
+          "title": "Privacy Policy",
+          "markdown": "",
+          "html": "/policies/privacy.html",
           "icon": "fa-chart-line",
-          "className": "monetization-page"
+          "className": "privacy-page"
+        },
+        {
+          "id": "cookies",
+          "title": "Cookie Policy",
+          "markdown": "",
+          "html": "/policies/cookie-policy.html",
+          "icon": "fa-cookie-bite",
+          "className": "cookies-page"
+        },
+        {
+          "id": "tos",
+          "title": "Terms of Service",
+          "markdown": "",
+          "html": "/policies/tos.html",
+          "icon": "fa-file-contract",
+          "className": "privacy-page"
         }
       ]
     },
@@ -180,7 +196,17 @@
         "html": "content/contact.html",
         "icon": "fa-envelope",
         "className": "contact-page"
-      }
+      },
+        {
+          "id": "signup",
+          "title": "Signup",
+          "markdown": "",
+          "target": "_blank",
+          "html": "https://app.docchainnotary.com/signup.html",
+          "icon": "fa-user-check",
+          "className": "api-signup"
+        }
+ 
   ]
 }
 
